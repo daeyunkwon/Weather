@@ -51,6 +51,5 @@ enum OpenWeatherAPI {
     
     var encoding: URLEncoding {
         return .queryString
-    }
-    
+    }   
 }

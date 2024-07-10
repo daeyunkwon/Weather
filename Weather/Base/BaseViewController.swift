@@ -19,7 +19,7 @@ class BaseViewController: UIViewController {
     
     func configureLayout() { }
     
-    func configureUI() { view.backgroundColor = .systemBackground }
+    func configureUI() { }
     
     func showNetworkFailAlert(type: OpenWeatherNetworkError) {
         let alert = UIAlertController(title: "시스템 오류", message: type.message, preferredStyle: .alert)
