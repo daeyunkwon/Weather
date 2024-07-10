@@ -13,6 +13,16 @@
 		44520BC32C3E68BE0004685D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44520BC22C3E68BE0004685D /* Assets.xcassets */; };
 		44520BC62C3E68BE0004685D /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 44520BC52C3E68BE0004685D /* Base */; };
 		44520BD12C3E6A2A0004685D /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 44520BD02C3E6A290004685D /* .gitignore */; };
+		44520BD72C3E6B5D0004685D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44520BD62C3E6B5D0004685D /* BaseViewController.swift */; };
+		44520BDA2C3E6C520004685D /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 44520BD92C3E6C520004685D /* SnapKit */; };
+		44520BDD2C3E6CA70004685D /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 44520BDC2C3E6CA70004685D /* Alamofire */; };
+		44520BE02C3E6CB40004685D /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 44520BDF2C3E6CB40004685D /* Kingfisher */; };
+		44520BE42C3E6D560004685D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44520BE32C3E6D560004685D /* NetworkManager.swift */; };
+		44520BE62C3E6E340004685D /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44520BE52C3E6E340004685D /* Reusable.swift */; };
+		44520BE82C3E6F6C0004685D /* OpenWeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44520BE72C3E6F6C0004685D /* OpenWeatherAPI.swift */; };
+		44520BEA2C3E702F0004685D /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44520BE92C3E702F0004685D /* APIKey.swift */; };
+		44520BED2C3E7D1D0004685D /* WeatherCurrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44520BEC2C3E7D1D0004685D /* WeatherCurrent.swift */; };
+		44520BEF2C3E89B00004685D /* WeatherForecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44520BEE2C3E89B00004685D /* WeatherForecase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +34,13 @@
 		44520BC52C3E68BE0004685D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		44520BC72C3E68BE0004685D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		44520BD02C3E6A290004685D /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		44520BD62C3E6B5D0004685D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		44520BE32C3E6D560004685D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		44520BE52C3E6E340004685D /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
+		44520BE72C3E6F6C0004685D /* OpenWeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherAPI.swift; sourceTree = "<group>"; };
+		44520BE92C3E702F0004685D /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		44520BEC2C3E7D1D0004685D /* WeatherCurrent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCurrent.swift; sourceTree = "<group>"; };
+		44520BEE2C3E89B00004685D /* WeatherForecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +48,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44520BE02C3E6CB40004685D /* Kingfisher in Frameworks */,
+				44520BDA2C3E6C520004685D /* SnapKit in Frameworks */,
+				44520BDD2C3E6CA70004685D /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +78,9 @@
 			isa = PBXGroup;
 			children = (
 				44520BCE2C3E69B40004685D /* Application */,
+				44520BD22C3E6B0B0004685D /* Utility */,
+				44520BD32C3E6B1E0004685D /* Service */,
+				44520BE22C3E6D1E0004685D /* Model */,
 				44520BCF2C3E69BA0004685D /* Main */,
 				44520BCD2C3E69AB0004685D /* Resource */,
 			);
@@ -91,6 +114,50 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		44520BD22C3E6B0B0004685D /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				44520BE52C3E6E340004685D /* Reusable.swift */,
+				44520BD52C3E6B520004685D /* Base */,
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
+		44520BD32C3E6B1E0004685D /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				44520BEB2C3E70550004685D /* Network */,
+			);
+			name = Service;
+			sourceTree = "<group>";
+		};
+		44520BD52C3E6B520004685D /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				44520BD62C3E6B5D0004685D /* BaseViewController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		44520BE22C3E6D1E0004685D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				44520BEC2C3E7D1D0004685D /* WeatherCurrent.swift */,
+				44520BEE2C3E89B00004685D /* WeatherForecase.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		44520BEB2C3E70550004685D /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				44520BE92C3E702F0004685D /* APIKey.swift */,
+				44520BE72C3E6F6C0004685D /* OpenWeatherAPI.swift */,
+				44520BE32C3E6D560004685D /* NetworkManager.swift */,
+			);
+			name = Network;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -107,6 +174,11 @@
 			dependencies = (
 			);
 			name = Weather;
+			packageProductDependencies = (
+				44520BD92C3E6C520004685D /* SnapKit */,
+				44520BDC2C3E6CA70004685D /* Alamofire */,
+				44520BDF2C3E6CB40004685D /* Kingfisher */,
+			);
 			productName = Weather;
 			productReference = 44520BB62C3E68BC0004685D /* Weather.app */;
 			productType = "com.apple.product-type.application";
@@ -135,6 +207,11 @@
 				Base,
 			);
 			mainGroup = 44520BAD2C3E68BC0004685D;
+			packageReferences = (
+				44520BD82C3E6C520004685D /* XCRemoteSwiftPackageReference "SnapKit" */,
+				44520BDB2C3E6CA70004685D /* XCRemoteSwiftPackageReference "Alamofire" */,
+				44520BDE2C3E6CB40004685D /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = 44520BB72C3E68BC0004685D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -162,7 +239,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44520BE62C3E6E340004685D /* Reusable.swift in Sources */,
 				44520BBE2C3E68BC0004685D /* MainViewController.swift in Sources */,
+				44520BEA2C3E702F0004685D /* APIKey.swift in Sources */,
+				44520BE82C3E6F6C0004685D /* OpenWeatherAPI.swift in Sources */,
+				44520BEF2C3E89B00004685D /* WeatherForecase.swift in Sources */,
+				44520BED2C3E7D1D0004685D /* WeatherCurrent.swift in Sources */,
+				44520BD72C3E6B5D0004685D /* BaseViewController.swift in Sources */,
+				44520BE42C3E6D560004685D /* NetworkManager.swift in Sources */,
 				44520BBA2C3E68BC0004685D /* AppDelegate.swift in Sources */,
 				44520BBC2C3E68BC0004685D /* SceneDelegate.swift in Sources */,
 			);
@@ -387,6 +471,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		44520BD82C3E6C520004685D /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+		44520BDB2C3E6CA70004685D /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
+		44520BDE2C3E6CB40004685D /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.12.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		44520BD92C3E6C520004685D /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 44520BD82C3E6C520004685D /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		44520BDC2C3E6CA70004685D /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 44520BDB2C3E6CA70004685D /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		44520BDF2C3E6CB40004685D /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 44520BDE2C3E6CB40004685D /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 44520BAE2C3E68BC0004685D /* Project object */;
 }

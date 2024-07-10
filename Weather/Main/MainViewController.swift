@@ -7,12 +7,40 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+final class MainViewController: BaseViewController {
 
+    //MARK: - Properties
+    
+    
+    
+    //MARK: - UI Components
+    
+    
+    
+    //MARK: - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemYellow
+        
     }
+    
+    //MARK: - Configurations
+    
+    override func bindData() {
+        
+    }
+    
+    override func configureLayout() {
+        
+    }
+    
+    override func configureUI() {
+        
+    }
+    
+    //MARK: - Functions
+    
+
 
 
 }
