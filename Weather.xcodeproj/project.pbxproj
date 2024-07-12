@@ -32,6 +32,9 @@
 		44AB5D2B2C3ED632004236A1 /* MainTableViewFiveDaysCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB5D2A2C3ED632004236A1 /* MainTableViewFiveDaysCollectionCell.swift */; };
 		44AB5D2D2C3EE2CD004236A1 /* MainTableViewLocationTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB5D2C2C3EE2CD004236A1 /* MainTableViewLocationTableCell.swift */; };
 		44AB5D2F2C3F565A004236A1 /* MainTableViewOtherInformationCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB5D2E2C3F565A004236A1 /* MainTableViewOtherInformationCollectionCell.swift */; };
+		44AB5D3E2C418570004236A1 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB5D3D2C418570004236A1 /* MainViewModel.swift */; };
+		44AB5D402C41859C004236A1 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB5D3F2C41859C004236A1 /* Observable.swift */; };
+		44AB5D442C419A88004236A1 /* MainHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB5D432C419A88004236A1 /* MainHeaderViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +62,9 @@
 		44AB5D2A2C3ED632004236A1 /* MainTableViewFiveDaysCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewFiveDaysCollectionCell.swift; sourceTree = "<group>"; };
 		44AB5D2C2C3EE2CD004236A1 /* MainTableViewLocationTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewLocationTableCell.swift; sourceTree = "<group>"; };
 		44AB5D2E2C3F565A004236A1 /* MainTableViewOtherInformationCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewOtherInformationCollectionCell.swift; sourceTree = "<group>"; };
+		44AB5D3D2C418570004236A1 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		44AB5D3F2C41859C004236A1 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		44AB5D432C419A88004236A1 /* MainHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHeaderViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,13 +133,8 @@
 		44520BCF2C3E69BA0004685D /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				44520BBD2C3E68BC0004685D /* MainViewController.swift */,
-				44520BF02C3EB7DE0004685D /* MainHeaderCell.swift */,
-				44520BF62C3EBBFB0004685D /* MainCollectionTableViewCell.swift */,
-				44520BF82C3EC0D80004685D /* MainTableViewThreeHoursCollectionCell.swift */,
-				44AB5D2A2C3ED632004236A1 /* MainTableViewFiveDaysCollectionCell.swift */,
-				44AB5D2C2C3EE2CD004236A1 /* MainTableViewLocationTableCell.swift */,
-				44AB5D2E2C3F565A004236A1 /* MainTableViewOtherInformationCollectionCell.swift */,
+				44AB5D422C4198B6004236A1 /* ViewModel */,
+				44AB5D412C4198A7004236A1 /* View */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -143,6 +144,7 @@
 			children = (
 				44520BE52C3E6E340004685D /* Reusable.swift */,
 				44AB5D282C3ED038004236A1 /* Constant.swift */,
+				44AB5D3F2C41859C004236A1 /* Observable.swift */,
 				44520BD52C3E6B520004685D /* Base */,
 			);
 			name = Utility;
@@ -183,6 +185,29 @@
 				44520BE32C3E6D560004685D /* NetworkManager.swift */,
 			);
 			name = Network;
+			sourceTree = "<group>";
+		};
+		44AB5D412C4198A7004236A1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				44520BBD2C3E68BC0004685D /* MainViewController.swift */,
+				44520BF02C3EB7DE0004685D /* MainHeaderCell.swift */,
+				44520BF62C3EBBFB0004685D /* MainCollectionTableViewCell.swift */,
+				44520BF82C3EC0D80004685D /* MainTableViewThreeHoursCollectionCell.swift */,
+				44AB5D2A2C3ED632004236A1 /* MainTableViewFiveDaysCollectionCell.swift */,
+				44AB5D2C2C3EE2CD004236A1 /* MainTableViewLocationTableCell.swift */,
+				44AB5D2E2C3F565A004236A1 /* MainTableViewOtherInformationCollectionCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		44AB5D422C4198B6004236A1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				44AB5D3D2C418570004236A1 /* MainViewModel.swift */,
+				44AB5D432C419A88004236A1 /* MainHeaderViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,11 +301,14 @@
 				44520BF32C3EB8030004685D /* BaseTableViewCell.swift in Sources */,
 				44520BEF2C3E89B00004685D /* WeatherForecase.swift in Sources */,
 				44520BF92C3EC0D80004685D /* MainTableViewThreeHoursCollectionCell.swift in Sources */,
+				44AB5D402C41859C004236A1 /* Observable.swift in Sources */,
 				44520BED2C3E7D1D0004685D /* WeatherCurrent.swift in Sources */,
 				44AB5D2F2C3F565A004236A1 /* MainTableViewOtherInformationCollectionCell.swift in Sources */,
 				44520BF12C3EB7DE0004685D /* MainHeaderCell.swift in Sources */,
 				44520BD72C3E6B5D0004685D /* BaseViewController.swift in Sources */,
 				44520BE42C3E6D560004685D /* NetworkManager.swift in Sources */,
+				44AB5D442C419A88004236A1 /* MainHeaderViewModel.swift in Sources */,
+				44AB5D3E2C418570004236A1 /* MainViewModel.swift in Sources */,
 				44520BF72C3EBBFB0004685D /* MainCollectionTableViewCell.swift in Sources */,
 				44520BBA2C3E68BC0004685D /* AppDelegate.swift in Sources */,
 				44520BF52C3EB87B0004685D /* BaseCollectionViewCell.swift in Sources */,

@@ -11,7 +11,6 @@ import SnapKit
 
 final class MainCollectionTableViewCell: BaseTableViewCell {
     
-    
     //MARK: - Properties
     
     enum CellType: Int {
@@ -19,7 +18,29 @@ final class MainCollectionTableViewCell: BaseTableViewCell {
         case fiveDays
         case other
     }
-    var cellType: CellType = .other
+    var cellType: CellType = .other {
+        didSet {
+            switch cellType {
+            case .threeHours:
+                updateTitleButtonAppearance(image: Constant.SymbolImage.calendar, titleText: " 3시간 간격의 일기예보")
+            case .fiveDays:
+                updateTitleButtonAppearance(image: Constant.SymbolImage.calendar, titleText: " 5일 간의 일기예보")
+            case .other:
+                updateTitleButtonAppearance(image: Constant.SymbolImage.thermometerMedium, titleText: "")
+            }
+            
+            self.configureAutoLayout()
+            
+            if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+                switch cellType {
+                case .threeHours: flowLayout.scrollDirection = .horizontal
+                case .fiveDays, .other:
+                    flowLayout.scrollDirection = .vertical
+                    self.collectionView.isScrollEnabled = false
+                }
+            }
+        }
+    }
     
     //MARK: - UI Components
     
@@ -32,18 +53,6 @@ final class MainCollectionTableViewCell: BaseTableViewCell {
     
     private lazy var titleButton: UIButton = {
         let btn = UIButton(type: .system)
-        
-        switch cellType {
-        case .threeHours:
-            btn.setImage(Constant.SymbolImage.calendar, for: .normal)
-            btn.setTitle(" 3시간 간격의 일기예보", for: .normal)
-        case .fiveDays:
-            btn.setImage(Constant.SymbolImage.calendar, for: .normal)
-            btn.setTitle(" 5일 간의 일기예보", for: .normal)
-        case .other:
-            btn.setImage(Constant.SymbolImage.thermometerMedium, for: .normal)
-            btn.setTitle(" 5일 간의 일기예보", for: .normal)
-        }
         btn.tintColor = Constant.Color.labelColor
         btn.isUserInteractionEnabled = false
         return btn
@@ -51,18 +60,13 @@ final class MainCollectionTableViewCell: BaseTableViewCell {
     
     private let separatorLine: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemGray3
+        view.backgroundColor = .systemGray
+        view.alpha = 0.5
         return view
     }()
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        
-        switch cellType {
-        case .threeHours: layout.scrollDirection = .horizontal
-        case .fiveDays, .other: layout.scrollDirection = .vertical
-        }
-        
         layout.sectionInset = .init(top: 10, left: 10, bottom: 10, right: 10)
         
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -70,6 +74,8 @@ final class MainCollectionTableViewCell: BaseTableViewCell {
         cv.delegate = self
         cv.backgroundColor = .clear
         cv.showsHorizontalScrollIndicator = false
+        cv.showsVerticalScrollIndicator = false
+        
         cv.register(MainTableViewThreeHoursCollectionCell.self, forCellWithReuseIdentifier: MainTableViewThreeHoursCollectionCell.identifier)
         cv.register(MainTableViewFiveDaysCollectionCell.self, forCellWithReuseIdentifier: MainTableViewFiveDaysCollectionCell.identifier)
         cv.register(MainTableViewOtherInformationCollectionCell.self, forCellWithReuseIdentifier: MainTableViewOtherInformationCollectionCell.identifier)
@@ -78,7 +84,18 @@ final class MainCollectionTableViewCell: BaseTableViewCell {
     
     //MARK: - Configurations
     
-    override func configureLayout() {
+    override func configureUI() {
+        super.configureUI()
+    }
+    
+    //MARK: - Functions
+    
+    private func updateTitleButtonAppearance(image: UIImage?, titleText: String) {
+        titleButton.setImage(image, for: .normal)
+        titleButton.setTitle(titleText, for: .normal)
+    }
+    
+    private func configureAutoLayout() {
         switch cellType {
         case .threeHours, .fiveDays:
             contentView.addSubview(backView)
@@ -99,7 +116,7 @@ final class MainCollectionTableViewCell: BaseTableViewCell {
                 
                 switch cellType {
                 case .threeHours:
-                    make.leading.equalTo(titleButton.snp.leading).offset(15)
+                    make.leading.equalTo(titleButton.snp.leading).offset(0)
                     make.trailing.equalTo(backView.snp.trailing)
                 case .fiveDays:
                     make.horizontalEdges.equalToSuperview().inset(15)
@@ -124,14 +141,6 @@ final class MainCollectionTableViewCell: BaseTableViewCell {
             }
         }
     }
-    
-    override func configureUI() {
-        super.configureUI()
-    }
-    
-    //MARK: - Functions
-    
-    
 }
 
 //MARK: - UICollectionViewDataSource, UICollectionViewDelegate
@@ -186,8 +195,7 @@ extension MainCollectionTableViewCell: UICollectionViewDelegateFlowLayout {
         
         switch cellType {
         case .threeHours:
-            let width: Double = 80
-            return CGSize(width: width, height: width * 2)
+            return CGSize(width: 60, height: 150)
             
         case .fiveDays:
             let width: Double = contentView.bounds.width - 60.0

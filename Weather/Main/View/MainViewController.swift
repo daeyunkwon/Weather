@@ -13,7 +13,7 @@ final class MainViewController: BaseViewController {
 
     //MARK: - Properties
     
-    
+    let viewModel = MainViewModel()
     
     //MARK: - UI Components
     
@@ -37,7 +37,7 @@ final class MainViewController: BaseViewController {
     
     private let bottomBackView: UIView = {
         let view = UIView()
-        view.backgroundColor = .black.withAlphaComponent(0.3)
+        view.backgroundColor = UIColor(red: 6/255, green: 25/255, blue: 52/255, alpha: 1)
         return view
     }()
     
@@ -73,7 +73,14 @@ final class MainViewController: BaseViewController {
     //MARK: - Configurations
     
     override func bindData() {
-        
+        viewModel.inputFetchData.value = ()
+        viewModel.outputWeatherCurrentData.bind { value in
+            guard value != nil else {
+                self.showNetworkFailAlert(type: .failedResponse)
+                return
+            }
+            self.tableView.reloadData()
+        }
     }
     
     override func configureLayout() {
@@ -140,29 +147,71 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         return 270
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 {
+            return 250
+        }
+        if indexPath.row == 3 {
+            return 520
+        }
         return 400
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MainCollectionTableViewCell.identifier, for: indexPath) as? MainCollectionTableViewCell else {
-            print("Failed to dequeue a MainCollectionTableViewCell. Using default UITableViewCell.")
+        
+        switch indexPath.row {
+        case 0: 
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: MainCollectionTableViewCell.identifier, for: indexPath) as? MainCollectionTableViewCell else {
+                print("Failed to dequeue a MainCollectionTableViewCell. Using default UITableViewCell.")
+                return UITableViewCell()
+            }
+            cell.cellType = .threeHours
+            cell.selectionStyle = .none
+            return cell
+        
+        case 1:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: MainCollectionTableViewCell.identifier, for: indexPath) as? MainCollectionTableViewCell else {
+                print("Failed to dequeue a MainCollectionTableViewCell. Using default UITableViewCell.")
+                return UITableViewCell()
+            }
+            cell.cellType = .fiveDays
+            cell.selectionStyle = .none
+            return cell
+            
+        case 2:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewLocationTableCell.identifier, for: indexPath) as? MainTableViewLocationTableCell else {
+                print("Failed to dequeue a MainTableViewLocationTableCell. Using default UITableViewCell.")
+                return UITableViewCell()
+            }
+            cell.selectionStyle = .none
+            return cell
+            
+        case 3:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: MainCollectionTableViewCell.identifier, for: indexPath) as? MainCollectionTableViewCell else {
+                print("Failed to dequeue a MainCollectionTableViewCell. Using default UITableViewCell.")
+                return UITableViewCell()
+            }
+            cell.cellType = .other
+            cell.selectionStyle = .none
+            return cell
+        default:
             return UITableViewCell()
         }
-        
-        cell.selectionStyle = .none
-        return cell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: MainHeaderCell.identifier) else {
+        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: MainHeaderCell.identifier) as? MainHeaderCell else {
             return nil
         }
-        
+        header.viewModel.inputData.value = self.viewModel.outputWeatherCurrentData.value
         return header
     }
 }

@@ -11,13 +11,16 @@ import SnapKit
 
 final class MainHeaderCell: UITableViewHeaderFooterView {
     
+    //MARK: - Properties
+    
+    let viewModel = MainHeaderViewModel()
+    
     //MARK: - UI Components
     
     private let cityNameLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 38)
         label.textColor = Constant.Color.labelColor
-        label.text = "Jeju City"
         return label
     }()
     
@@ -25,7 +28,6 @@ final class MainHeaderCell: UITableViewHeaderFooterView {
         let label = UILabel()
         label.font = .systemFont(ofSize: 110)
         label.textColor = Constant.Color.labelColor
-        label.text = "5.9°"
         return label
     }()
     
@@ -33,7 +35,6 @@ final class MainHeaderCell: UITableViewHeaderFooterView {
         let label = UILabel()
         label.font = .systemFont(ofSize: 25)
         label.textColor = Constant.Color.labelColor
-        label.text = "Broken Clouds"
         return label
     }()
     
@@ -41,7 +42,6 @@ final class MainHeaderCell: UITableViewHeaderFooterView {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20)
         label.textColor = Constant.Color.labelColor
-        label.text = "최고: 8.0° | 최저: -4.2°"
         return label
     }()
     
@@ -51,6 +51,7 @@ final class MainHeaderCell: UITableViewHeaderFooterView {
         super.init(reuseIdentifier: reuseIdentifier)
         configureLayout()
         contentView.backgroundColor = .clear
+        bind()
     }
     
     required init?(coder: NSCoder) {
@@ -83,9 +84,21 @@ final class MainHeaderCell: UITableViewHeaderFooterView {
         }
     }
     
-    //MARK: - Functions
-    
-    func configureCell() {
+    private func bind() {
+        viewModel.outputCityName.bind { value in
+            self.cityNameLabel.text = value
+        }
         
+        viewModel.outputTemp.bind { value in
+            self.mainTempLabel.text = value
+        }
+        
+        viewModel.outputDescription.bind { value in
+            self.descriptionLabel.text = value
+        }
+        
+        viewModel.outputSubTemp.bind { value in
+            self.subTempLabel.text = value
+        }
     }
 }
