@@ -27,7 +27,7 @@ final class MainTableViewLocationTableCell: BaseTableViewCell {
     
     private let titleButton: UIButton = {
         let btn = UIButton(type: .system)
-        btn.setImage(UIImage(systemName: "thermometer.medium")?.applyingSymbolConfiguration(.init(font: UIFont.systemFont(ofSize: 12))), for: .normal)
+        btn.setImage(Constant.SymbolImage.thermometerMedium, for: .normal)
         btn.setTitle(" 위치", for: .normal)
         btn.tintColor = Constant.Color.labelColor
         btn.isUserInteractionEnabled = false

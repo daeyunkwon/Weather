@@ -31,6 +31,7 @@ final class MainViewController: BaseViewController {
         tv.dataSource = self
         tv.register(MainHeaderCell.self, forHeaderFooterViewReuseIdentifier: MainHeaderCell.identifier)
         tv.register(MainCollectionTableViewCell.self, forCellReuseIdentifier: MainCollectionTableViewCell.identifier)
+        tv.register(MainTableViewLocationTableCell.self, forCellReuseIdentifier: MainTableViewLocationTableCell.identifier)
         return tv
     }()
     
@@ -78,11 +79,11 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 500
+        return 400
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

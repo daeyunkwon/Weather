@@ -17,8 +17,9 @@ final class MainCollectionTableViewCell: BaseTableViewCell {
     enum CellType: Int {
         case threeHours
         case fiveDays
+        case other
     }
-    var cellType: CellType = .fiveDays
+    var cellType: CellType = .other
     
     //MARK: - UI Components
     
@@ -31,11 +32,16 @@ final class MainCollectionTableViewCell: BaseTableViewCell {
     
     private lazy var titleButton: UIButton = {
         let btn = UIButton(type: .system)
-        btn.setImage(UIImage(systemName: "calendar")?.applyingSymbolConfiguration(.init(font: UIFont.systemFont(ofSize: 12))), for: .normal)
+        
         switch cellType {
         case .threeHours:
+            btn.setImage(Constant.SymbolImage.calendar, for: .normal)
             btn.setTitle(" 3시간 간격의 일기예보", for: .normal)
         case .fiveDays:
+            btn.setImage(Constant.SymbolImage.calendar, for: .normal)
+            btn.setTitle(" 5일 간의 일기예보", for: .normal)
+        case .other:
+            btn.setImage(Constant.SymbolImage.thermometerMedium, for: .normal)
             btn.setTitle(" 5일 간의 일기예보", for: .normal)
         }
         btn.tintColor = Constant.Color.labelColor
@@ -54,7 +60,7 @@ final class MainCollectionTableViewCell: BaseTableViewCell {
         
         switch cellType {
         case .threeHours: layout.scrollDirection = .horizontal
-        case .fiveDays: layout.scrollDirection = .vertical
+        case .fiveDays, .other: layout.scrollDirection = .vertical
         }
         
         layout.sectionInset = .init(top: 10, left: 10, bottom: 10, right: 10)
@@ -66,44 +72,56 @@ final class MainCollectionTableViewCell: BaseTableViewCell {
         cv.showsHorizontalScrollIndicator = false
         cv.register(MainTableViewThreeHoursCollectionCell.self, forCellWithReuseIdentifier: MainTableViewThreeHoursCollectionCell.identifier)
         cv.register(MainTableViewFiveDaysCollectionCell.self, forCellWithReuseIdentifier: MainTableViewFiveDaysCollectionCell.identifier)
+        cv.register(MainTableViewOtherInformationCollectionCell.self, forCellWithReuseIdentifier: MainTableViewOtherInformationCollectionCell.identifier)
         return cv
     }()
     
     //MARK: - Configurations
     
     override func configureLayout() {
-        contentView.addSubview(backView)
-        backView.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview().inset(5)
-            make.horizontalEdges.equalToSuperview().inset(15)
-        }
-        
-        backView.addSubview(titleButton)
-        titleButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(15)
-            make.leading.equalToSuperview().offset(15)
-        }
-        
-        backView.addSubview(separatorLine)
-        separatorLine.snp.makeConstraints { make in
-            make.top.equalTo(titleButton.snp.bottom).offset(10)
-            
-            switch cellType {
-            case .threeHours:
-                make.leading.equalTo(titleButton.snp.leading).offset(15)
-                make.trailing.equalTo(backView.snp.trailing)
-            case .fiveDays:
+        switch cellType {
+        case .threeHours, .fiveDays:
+            contentView.addSubview(backView)
+            backView.snp.makeConstraints { make in
+                make.top.bottom.equalToSuperview().inset(5)
                 make.horizontalEdges.equalToSuperview().inset(15)
             }
             
-            make.height.equalTo(0.2)
-        }
-        
-        backView.addSubview(collectionView)
-        collectionView.snp.makeConstraints { make in
-            make.top.equalTo(separatorLine.snp.bottom).offset(-10)
-            make.horizontalEdges.equalToSuperview()
-            make.bottom.equalToSuperview()
+            backView.addSubview(titleButton)
+            titleButton.snp.makeConstraints { make in
+                make.top.equalToSuperview().offset(15)
+                make.leading.equalToSuperview().offset(15)
+            }
+            
+            backView.addSubview(separatorLine)
+            separatorLine.snp.makeConstraints { make in
+                make.top.equalTo(titleButton.snp.bottom).offset(10)
+                
+                switch cellType {
+                case .threeHours:
+                    make.leading.equalTo(titleButton.snp.leading).offset(15)
+                    make.trailing.equalTo(backView.snp.trailing)
+                case .fiveDays:
+                    make.horizontalEdges.equalToSuperview().inset(15)
+                case .other:
+                    break
+                }
+                
+                make.height.equalTo(0.2)
+            }
+            
+            backView.addSubview(collectionView)
+            collectionView.snp.makeConstraints { make in
+                make.top.equalTo(separatorLine.snp.bottom).offset(-10)
+                make.horizontalEdges.equalToSuperview()
+                make.bottom.equalToSuperview()
+            }
+            
+        case .other:
+            contentView.addSubview(collectionView)
+            collectionView.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+            }
         }
     }
     
@@ -124,7 +142,7 @@ extension MainCollectionTableViewCell: UICollectionViewDataSource, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -141,6 +159,20 @@ extension MainCollectionTableViewCell: UICollectionViewDataSource, UICollectionV
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainTableViewFiveDaysCollectionCell.identifier, for: indexPath) as? MainTableViewFiveDaysCollectionCell else {
                 print("Failed to dequeue a MainCollectionTableViewCollectionell. Using default UICollectionViewCell.")
                 return UICollectionViewCell()
+            }
+            return cell
+        
+        case .other:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainTableViewOtherInformationCollectionCell.identifier, for: indexPath) as? MainTableViewOtherInformationCollectionCell else {
+                print("Failed to dequeue a MainCollectionTableViewCollectionell. Using default UICollectionViewCell.")
+                return UICollectionViewCell()
+            }
+            switch indexPath.item {
+            case 0: cell.cellType = .wind
+            case 1: cell.cellType = .cloud
+            case 2: cell.cellType = .pressure
+            case 3: cell.cellType = .humidity
+            default: break
             }
             return cell
         }
@@ -160,6 +192,10 @@ extension MainCollectionTableViewCell: UICollectionViewDelegateFlowLayout {
         case .fiveDays:
             let width: Double = contentView.bounds.width - 60.0
             return CGSize(width: width, height: 60)
+        
+        case .other:
+            let width: Double = (contentView.bounds.width + 10.0) / 2 - 20.0
+            return CGSize(width: width, height: width)
         }
     }
 }

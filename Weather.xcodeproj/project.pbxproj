@@ -31,6 +31,7 @@
 		44AB5D292C3ED038004236A1 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB5D282C3ED038004236A1 /* Constant.swift */; };
 		44AB5D2B2C3ED632004236A1 /* MainTableViewFiveDaysCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB5D2A2C3ED632004236A1 /* MainTableViewFiveDaysCollectionCell.swift */; };
 		44AB5D2D2C3EE2CD004236A1 /* MainTableViewLocationTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB5D2C2C3EE2CD004236A1 /* MainTableViewLocationTableCell.swift */; };
+		44AB5D2F2C3F565A004236A1 /* MainTableViewOtherInformationCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB5D2E2C3F565A004236A1 /* MainTableViewOtherInformationCollectionCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		44AB5D282C3ED038004236A1 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		44AB5D2A2C3ED632004236A1 /* MainTableViewFiveDaysCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewFiveDaysCollectionCell.swift; sourceTree = "<group>"; };
 		44AB5D2C2C3EE2CD004236A1 /* MainTableViewLocationTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewLocationTableCell.swift; sourceTree = "<group>"; };
+		44AB5D2E2C3F565A004236A1 /* MainTableViewOtherInformationCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewOtherInformationCollectionCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 				44520BF82C3EC0D80004685D /* MainTableViewThreeHoursCollectionCell.swift */,
 				44AB5D2A2C3ED632004236A1 /* MainTableViewFiveDaysCollectionCell.swift */,
 				44AB5D2C2C3EE2CD004236A1 /* MainTableViewLocationTableCell.swift */,
+				44AB5D2E2C3F565A004236A1 /* MainTableViewOtherInformationCollectionCell.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 				44520BEF2C3E89B00004685D /* WeatherForecase.swift in Sources */,
 				44520BF92C3EC0D80004685D /* MainTableViewThreeHoursCollectionCell.swift in Sources */,
 				44520BED2C3E7D1D0004685D /* WeatherCurrent.swift in Sources */,
+				44AB5D2F2C3F565A004236A1 /* MainTableViewOtherInformationCollectionCell.swift in Sources */,
 				44520BF12C3EB7DE0004685D /* MainHeaderCell.swift in Sources */,
 				44520BD72C3E6B5D0004685D /* BaseViewController.swift in Sources */,
 				44520BE42C3E6D560004685D /* NetworkManager.swift in Sources */,
