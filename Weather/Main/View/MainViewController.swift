@@ -74,11 +74,11 @@ final class MainViewController: BaseViewController {
     
     override func bindData() {
         viewModel.inputFetchData.value = ()
-        viewModel.outputWeatherCurrentData.bind { value in
-            guard value != nil else {
+        viewModel.outputFetchDataCompletion.bind { _ in
+            if self.viewModel.outputWeatherCurrentData == nil || self.viewModel.outputWeatherForecastData == nil {
                 self.showNetworkFailAlert(type: .failedResponse)
-                return
             }
+            print(self.viewModel.outputWeatherForecastData)
             self.tableView.reloadData()
         }
     }
@@ -211,7 +211,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: MainHeaderCell.identifier) as? MainHeaderCell else {
             return nil
         }
-        header.viewModel.inputData.value = self.viewModel.outputWeatherCurrentData.value
+        header.viewModel.inputData.value = self.viewModel.outputWeatherCurrentData
         return header
     }
 }

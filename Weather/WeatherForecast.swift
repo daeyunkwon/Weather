@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct WeatherForecaseResult: Decodable {
+struct WeatherForecastResult: Decodable {
     let cnt: Int
-    let list: [WeatherForecase]
+    let list: [WeatherForecast]
 }
 
-struct WeatherForecase: Decodable {
+struct WeatherForecast: Decodable {
     let main: Main
     let weather: [Weather]
     let date: String

@@ -20,7 +20,9 @@ final class MainViewModel {
     
     //MARK: - Ouputs
     
-    private(set) var outputWeatherCurrentData: Observable<WeatherCurrent?> = Observable(nil)
+    private(set) var outputWeatherCurrentData: WeatherCurrent?
+    private(set) var outputWeatherForecastData: WeatherForecastResult?
+    private(set) var outputFetchDataCompletion = Observable<Bool>(false)
     
     //MARK: - Init
     
@@ -37,15 +39,43 @@ final class MainViewModel {
     //MARK: - Functions
 
     private func fetchData() {
-        NetworkManager.shared.fetchData(api: .current(lat: self.lat, lon: self.lon), model: WeatherCurrent.self) { result in
-            switch result {
-            case .success(let value):
-                self.outputWeatherCurrentData.value = value
-                
-            case .failure(let error):
-                self.outputWeatherCurrentData.value = nil
-                print(error)
+        
+        let group = DispatchGroup()
+        
+        group.enter()
+        DispatchQueue.global().async(group: group) {
+            NetworkManager.shared.fetchData(api: .current(lat: self.lat, lon: self.lon), model: WeatherCurrent.self) { result in
+                switch result {
+                case .success(let value):
+                    self.outputWeatherCurrentData = value
+                    group.leave()
+                    
+                case .failure(let error):
+                    self.outputWeatherCurrentData = nil
+                    print(error)
+                    group.leave()
+                }
             }
+        }
+        
+        group.enter()
+        DispatchQueue.global().async(group: group) {
+            NetworkManager.shared.fetchData(api: .forecast(lat: self.lat, lon: self.lon), model: WeatherForecastResult.self) { result in
+                switch result {
+                case .success(let value):
+                    self.outputWeatherForecastData = value
+                    group.leave()
+                    
+                case .failure(let error):
+                    self.outputWeatherForecastData = nil
+                    print(error)
+                    group.leave()
+                }
+            }
+        }
+        
+        group.notify(queue: .main) {
+            self.outputFetchDataCompletion.value = true
         }
     }
     
