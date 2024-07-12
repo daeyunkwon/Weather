@@ -35,6 +35,35 @@ final class MainViewController: BaseViewController {
         return tv
     }()
     
+    private let bottomBackView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black.withAlphaComponent(0.3)
+        return view
+    }()
+    
+    private let separatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemGray
+        view.alpha = 0.5
+        return view
+    }()
+    
+    private lazy var mapButton: UIButton = {
+        let btn = UIButton(type: .system)
+        btn.tintColor = .white
+        btn.setImage(Constant.SymbolImage.map, for: .normal)
+        btn.addTarget(self, action: #selector(mapButtonTapped), for: .touchUpInside)
+        return btn
+    }()
+    
+    private lazy var listButton: UIButton = {
+        let btn = UIButton(type: .system)
+        btn.tintColor = .white
+        btn.setImage(Constant.SymbolImage.list, for: .normal)
+        btn.addTarget(self, action: #selector(listButtonTapped), for: .touchUpInside)
+        return btn
+    }()
+    
     //MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -58,6 +87,34 @@ final class MainViewController: BaseViewController {
             make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
             make.bottom.equalToSuperview()
         }
+        
+        view.addSubview(bottomBackView)
+        bottomBackView.snp.makeConstraints { make in
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(view.frame.size.height / 10)
+            make.bottom.equalToSuperview()
+        }
+        
+        bottomBackView.addSubview(separatorView)
+        separatorView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.horizontalEdges.equalToSuperview()
+            make.height.equalTo(0.2)
+        }
+        
+        bottomBackView.addSubview(mapButton)
+        mapButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(5)
+            make.leading.equalToSuperview().inset(15)
+            make.size.equalTo(50)
+        }
+        
+        bottomBackView.addSubview(listButton)
+        listButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(5)
+            make.trailing.equalToSuperview().inset(15)
+            make.size.equalTo(50)
+        }
     }
     
     override func configureUI() {
@@ -66,8 +123,13 @@ final class MainViewController: BaseViewController {
     
     //MARK: - Functions
     
+    @objc private func mapButtonTapped() {
+        print(#function)
+    }
 
-
+    @objc private func listButtonTapped() {
+        print(#function)
+    }
 
 }
 

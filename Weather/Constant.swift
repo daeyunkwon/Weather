@@ -19,5 +19,7 @@ enum Constant {
         static let wind = UIImage(systemName: "wind")?.applyingSymbolConfiguration(.init(font: UIFont.systemFont(ofSize: 12)))
         static let dropFill = UIImage(systemName: "drop.fill")?.applyingSymbolConfiguration(.init(font: UIFont.systemFont(ofSize: 12)))
         static let humidity = UIImage(systemName: "humidity")?.applyingSymbolConfiguration(.init(font: UIFont.systemFont(ofSize: 12)))
+        static let map = UIImage(systemName: "map")
+        static let list = UIImage(systemName: "list.bullet")
     }
 }
