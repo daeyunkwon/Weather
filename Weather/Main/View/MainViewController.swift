@@ -85,7 +85,11 @@ final class MainViewController: BaseViewController {
         viewModel.outputPushCitySearchVC.bind { _ in
             let vc = CitySearchViewController()
             vc.viewModel.inputFetchData.value = ()
-            self.navigationController?.pushViewController(vc, animated: true)
+            vc.viewModel.closureDataSendToMainVC = { [weak self] sender in
+                guard let self else { return }
+                self.viewModel.inputFetchDataWithSelectedCity.value = sender
+            }
+            self.pushViewController(vc: vc)
         }
     }
     

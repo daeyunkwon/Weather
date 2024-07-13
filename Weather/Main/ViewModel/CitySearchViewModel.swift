@@ -11,7 +11,11 @@ final class CitySearchViewModel {
     
     //MARK: - Inputs
     
+    var closureDataSendToMainVC: ((City) -> Void) = { sender in }
+    
     var inputFetchData = Observable<Void?>(nil)
+    
+    var inputCellSelected = Observable<City?>(nil)
     
     //MARK: - Ouputs
     
@@ -26,6 +30,11 @@ final class CitySearchViewModel {
     private func transform() {
         inputFetchData.bind { _ in
             self.outputCityDatas.value = self.loadJson(filename: "CityList")
+        }
+        
+        inputCellSelected.bind { city in
+            guard let data = city else { return }
+            self.closureDataSendToMainVC(data)
         }
     }
     

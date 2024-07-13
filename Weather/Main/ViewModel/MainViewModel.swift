@@ -9,15 +9,13 @@ import Foundation
 
 final class MainViewModel {
     
-    //MARK: - Properties
-    
-    private var lat = 37.583328
-    private var lon  = 127.0
-    
     //MARK: - Inputs
     
     var inputFetchData = Observable<Void?>(nil)
+    
     var inputListButtonTapped = Observable<Void?>(nil)
+    
+    var inputFetchDataWithSelectedCity = Observable<City?>(nil)
     
     //MARK: - Ouputs
     
@@ -34,23 +32,28 @@ final class MainViewModel {
     
     private func transform() {
         inputFetchData.bind { _ in
-            self.fetchData()
+            self.fetchData(lat: 37.583328, lon: 127.0) //Seoul
         }
         
         inputListButtonTapped.bind { _ in
             self.outputPushCitySearchVC.value = ()
         }
+        
+        inputFetchDataWithSelectedCity.bind { city in
+            guard let data = city else { return }
+            self.fetchData(lat: data.coord.lat, lon: data.coord.lon)
+        }
     }
     
     //MARK: - Functions
 
-    private func fetchData() {
+    private func fetchData(lat: Double, lon: Double) {
         
         let group = DispatchGroup()
         
         group.enter()
         DispatchQueue.global().async(group: group) {
-            NetworkManager.shared.fetchData(api: .current(lat: self.lat, lon: self.lon), model: WeatherCurrent.self) { result in
+            NetworkManager.shared.fetchData(api: .current(lat: lat, lon: lon), model: WeatherCurrent.self) { result in
                 switch result {
                 case .success(let value):
                     self.outputWeatherCurrentData = value
@@ -66,7 +69,7 @@ final class MainViewModel {
         
         group.enter()
         DispatchQueue.global().async(group: group) {
-            NetworkManager.shared.fetchData(api: .forecast(lat: self.lat, lon: self.lon), model: WeatherForecastResult.self) { result in
+            NetworkManager.shared.fetchData(api: .forecast(lat: lat, lon: lon), model: WeatherForecastResult.self) { result in
                 switch result {
                 case .success(let value):
                     self.outputWeatherForecastData = value

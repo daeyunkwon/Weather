@@ -29,4 +29,12 @@ class BaseViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "확인", style: .cancel))
         present(alert, animated: true)
     }
+    
+    func pushViewController(vc: UIViewController, animated: Bool = true) {
+        self.navigationController?.pushViewController(vc, animated: animated)
+    }
+    
+    func popViewController(animated: Bool = true) {
+        self.navigationController?.popViewController(animated: animated)
+    }
 }

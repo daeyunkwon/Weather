@@ -103,5 +103,9 @@ extension CitySearchViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.inputCellSelected.value = viewModel.outputCityDatas.value[indexPath.row]
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+        self.popViewController()
+    }
 }
