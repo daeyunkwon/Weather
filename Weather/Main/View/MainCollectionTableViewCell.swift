@@ -202,12 +202,27 @@ extension MainCollectionTableViewCell: UICollectionViewDataSource, UICollectionV
                 return UICollectionViewCell()
             }
             switch indexPath.item {
-            case 0: cell.cellType = .wind
-            case 1: cell.cellType = .cloud
-            case 2: cell.cellType = .pressure
-            case 3: cell.cellType = .humidity
-            default: break
+            case 0:
+                cell.cellType = .wind
+                cell.viewModel.cellType = .wind
+                
+            case 1: 
+                cell.cellType = .cloud
+                cell.viewModel.cellType = .cloud
+                
+            case 2:
+                cell.cellType = .pressure
+                cell.viewModel.cellType = .pressure
+                
+            case 3: 
+                cell.cellType = .humidity
+                cell.viewModel.cellType = .humidity
+            default: 
+                break
             }
+            
+            cell.viewModel.inputData.value = viewModel.outputWeatherCurrentData.value
+            
             return cell
         }
     }

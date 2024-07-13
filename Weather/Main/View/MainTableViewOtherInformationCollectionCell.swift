@@ -13,6 +13,8 @@ final class MainTableViewOtherInformationCollectionCell: BaseCollectionViewCell 
     
     //MARK: - Properties
     
+    let viewModel = MainTableViewOtherInformationCollectionCellViewModel()
+    
     enum CellType {
         case wind
         case cloud
@@ -25,7 +27,6 @@ final class MainTableViewOtherInformationCollectionCell: BaseCollectionViewCell 
             case .wind:
                 updateTitleButtonAppearance(image: Constant.SymbolImage.wind, titleText: " 바람속도")
                 subInformationLabel.isHidden = false
-                subInformationLabel.text = "강풍: 4.42m/s"
             case .cloud:
                 updateTitleButtonAppearance(image: Constant.SymbolImage.dropFill, titleText: " 구름")
                 subInformationLabel.isHidden = true
@@ -36,9 +37,6 @@ final class MainTableViewOtherInformationCollectionCell: BaseCollectionViewCell 
                 updateTitleButtonAppearance(image: Constant.SymbolImage.humidity, titleText: " 습도")
                 subInformationLabel.isHidden = true
             }
-            
-            informationLabel.text = "1.35m/s"
-            
         }
     }
     
@@ -97,6 +95,16 @@ final class MainTableViewOtherInformationCollectionCell: BaseCollectionViewCell 
         subInformationLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(15)
             make.bottom.equalToSuperview().offset(-15)
+        }
+    }
+    
+    override func bindData() {
+        viewModel.outputInformation.bind { str in
+            self.informationLabel.text = str
+        }
+        
+        viewModel.outputSubInformation.bind { str in
+            self.subInformationLabel.text = str
         }
     }
     
