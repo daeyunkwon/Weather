@@ -7,13 +7,14 @@
 
 import UIKit
 
+import Kingfisher
 import SnapKit
 
 final class MainTableViewFiveDaysCollectionCell: BaseCollectionViewCell {
     
     //MARK: - Properties
     
-    
+    let viewModel = MainTableViewFiveDaysCollectionCellViewModel()
     
     //MARK: - UI Components
     
@@ -27,14 +28,12 @@ final class MainTableViewFiveDaysCollectionCell: BaseCollectionViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 23)
         label.textColor = Constant.Color.labelColor
-        label.text = "오늘"
         return label
     }()
     
     private let iconImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
-        iv.image = UIImage(systemName: "star")
         return iv
     }()
     
@@ -42,7 +41,6 @@ final class MainTableViewFiveDaysCollectionCell: BaseCollectionViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 23)
         label.textColor = .gray
-        label.text = "최저 -2°"
         return label
     }()
     
@@ -50,7 +48,6 @@ final class MainTableViewFiveDaysCollectionCell: BaseCollectionViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 23)
         label.textColor = Constant.Color.labelColor
-        label.text = "최고 15°"
         return label
     }()
     
@@ -92,12 +89,25 @@ final class MainTableViewFiveDaysCollectionCell: BaseCollectionViewCell {
         }
     }
     
+    override func bindData() {
+        viewModel.outputDayOfTheWeek.bind { value in
+            self.dayOfTheWeekLabel.text = value
+        }
+        
+        viewModel.outputIconURL.bind { url in
+            self.iconImageView.kf.setImage(with: url)
+        }
+        
+        viewModel.outputMinTemperature.bind { value in
+            self.minTemperatureLabel.text = value
+        }
+        
+        viewModel.outputMaxTemperature.bind { value in
+            self.maxTemperatureLabel.text = value
+        }
+    }
+    
     override func configureUI() {
         super.configureUI()
     }
-    
-    //MARK: - Functions
-    
-    
-    
 }

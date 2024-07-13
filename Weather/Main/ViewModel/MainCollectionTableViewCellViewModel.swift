@@ -67,33 +67,55 @@ final class MainCollectionTableViewCellViewModel {
         
         outputFiveDaysForecastDataList.value = dataList.filter {
             guard let date = $0.date else { return false }
-            let calendar = Calendar.current
+            var calendar = Calendar.current
+            calendar.timeZone = TimeZone(identifier: "UTC") ?? TimeZone.current
             
-            if date == calendar.date(byAdding: .day, value: 1, to: date) ?? Date() && isFindFirst == false {
-                isFindFirst = true
-                return true
+            let current = calendar.component(.day, from: date)
+            
+            if !isFindFirst {
+                let today = calendar.date(byAdding: .day, value: 0, to: Date())
+                let compare = calendar.component(.day, from: today ?? Date())
+                if current == compare {
+                    isFindFirst = true
+                    return true
+                }
             }
             
-            if date == calendar.date(byAdding: .day, value: 2, to: date) ?? Date() && isFindSecond == false {
-                isFindSecond = true
-                return true
+            if !isFindSecond {
+                let nextDay = calendar.date(byAdding: .day, value: 1, to: Date())
+                let compare = calendar.component(.day, from: nextDay ?? Date())
+                if current == compare {
+                    isFindSecond = true
+                    return true
+                }
             }
             
-            if date == calendar.date(byAdding: .day, value: 3, to: date) ?? Date() && isFindThird == false {
-                isFindThird = true
-                return true
+            if !isFindThird {
+                let nextDay = calendar.date(byAdding: .day, value: 2, to: Date())
+                let compare = calendar.component(.day, from: nextDay ?? Date())
+                if current == compare {
+                    isFindThird = true
+                    return true
+                }
             }
             
-            if date == calendar.date(byAdding: .day, value: 4, to: date) ?? Date() && isFindFourth == false {
-                isFindFourth = true
-                return true
+            if !isFindFourth {
+                let nextDay = calendar.date(byAdding: .day, value: 3, to: Date())
+                let compare = calendar.component(.day, from: nextDay ?? Date())
+                if current == compare {
+                    isFindFourth = true
+                    return true
+                }
             }
             
-            if date == calendar.date(byAdding: .day, value: 5, to: date) ?? Date() && isFindFifth == false {
-                isFindFifth = true
-                return true
+            if !isFindFifth {
+                let nextDay = calendar.date(byAdding: .day, value: 4, to: Date())
+                let compare = calendar.component(.day, from: nextDay ?? Date())
+                if current == compare {
+                    isFindFifth = true
+                    return true
+                }
             }
-            
             return false
         }
     }

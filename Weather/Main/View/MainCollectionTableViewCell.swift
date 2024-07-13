@@ -193,6 +193,7 @@ extension MainCollectionTableViewCell: UICollectionViewDataSource, UICollectionV
                 print("Failed to dequeue a MainCollectionTableViewCollectionell. Using default UICollectionViewCell.")
                 return UICollectionViewCell()
             }
+            cell.viewModel.inputData.value = viewModel.outputFiveDaysForecastDataList.value[indexPath.row]
             return cell
         
         case .other:
