@@ -7,19 +7,19 @@
 
 import UIKit
 
+import Kingfisher
 import SnapKit
 
 final class MainTableViewThreeHoursCollectionCell: BaseCollectionViewCell {
     
     //MARK: - Properties
     
-    
+    let viewModel = MainTableViewThreeHoursCollectionCellViewModel()
     
     //MARK: - UI Components
     
     private let hourLabel: UILabel = {
         let label = UILabel()
-        label.text = "12시"
         label.textColor = Constant.Color.labelColor
         return label
     }()
@@ -27,16 +27,23 @@ final class MainTableViewThreeHoursCollectionCell: BaseCollectionViewCell {
     private let iconImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
-        iv.image = UIImage(systemName: "star")
         return iv
     }()
     
     private let tempLabel: UILabel = {
         let label = UILabel()
-        label.text = "8°"
         label.textColor = Constant.Color.labelColor
         return label
     }()
+    
+    //MARK: - Life Cycle
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        hourLabel.text = nil
+        iconImageView.image = nil
+        tempLabel.text = nil
+    }
     
     //MARK: - Configurations
     
@@ -50,7 +57,7 @@ final class MainTableViewThreeHoursCollectionCell: BaseCollectionViewCell {
         contentView.addSubview(iconImageView)
         iconImageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.size.equalTo(30)
+            make.size.equalTo(50)
         }
         
         contentView.addSubview(tempLabel)
@@ -60,11 +67,22 @@ final class MainTableViewThreeHoursCollectionCell: BaseCollectionViewCell {
         }
     }
     
+    override func bindData() {
+        viewModel.outputHour.bind { value in
+            self.hourLabel.text = value
+        }
+        
+        viewModel.outputIconImageURL.bind { image in
+            self.iconImageView.kf.setImage(with: image)
+        }
+        
+        viewModel.outputTemp.bind { value in
+            self.tempLabel.text = value
+        }
+    }
+    
     override func configureUI() {
         super.configureUI()
     }
     
-    //MARK: - Functions
-    
-
 }

@@ -74,11 +74,11 @@ final class MainViewController: BaseViewController {
     
     override func bindData() {
         viewModel.inputFetchData.value = ()
+        
         viewModel.outputFetchDataCompletion.bind { _ in
             if self.viewModel.outputWeatherCurrentData == nil || self.viewModel.outputWeatherForecastData == nil {
                 self.showNetworkFailAlert(type: .failedResponse)
             }
-            print(self.viewModel.outputWeatherForecastData)
             self.tableView.reloadData()
         }
     }
@@ -174,6 +174,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
                 return UITableViewCell()
             }
             cell.cellType = .threeHours
+            cell.viewModel.inputWeatherForecastData.value = viewModel.outputWeatherForecastData
             cell.selectionStyle = .none
             return cell
         
@@ -183,6 +184,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
                 return UITableViewCell()
             }
             cell.cellType = .fiveDays
+            cell.viewModel.inputWeatherForecastData.value = viewModel.outputWeatherForecastData
             cell.selectionStyle = .none
             return cell
             
@@ -200,6 +202,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
                 return UITableViewCell()
             }
             cell.cellType = .other
+            cell.viewModel.inputWeatherCurrentData.value = viewModel.outputWeatherCurrentData
             cell.selectionStyle = .none
             return cell
         default:

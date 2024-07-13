@@ -19,14 +19,14 @@ final class MainHeaderCell: UITableViewHeaderFooterView {
     
     private let cityNameLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 38)
+        label.font = .systemFont(ofSize: 45)
         label.textColor = Constant.Color.labelColor
         return label
     }()
     
     private let mainTempLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 110)
+        label.font = .systemFont(ofSize: 100)
         label.textColor = Constant.Color.labelColor
         return label
     }()

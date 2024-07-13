@@ -11,6 +11,7 @@ class BaseCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        bindData()
         configureLayout()
         configureUI()
     }
@@ -20,7 +21,9 @@ class BaseCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func bindData() { }
+    
     func configureLayout() { }
     
-    func configureUI() { contentView.backgroundColor = .clear }
+    func configureUI() { contentView.backgroundColor = .clear }   
 }

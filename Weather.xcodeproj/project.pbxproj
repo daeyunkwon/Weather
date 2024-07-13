@@ -35,6 +35,8 @@
 		44AB5D3E2C418570004236A1 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB5D3D2C418570004236A1 /* MainViewModel.swift */; };
 		44AB5D402C41859C004236A1 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB5D3F2C41859C004236A1 /* Observable.swift */; };
 		44AB5D442C419A88004236A1 /* MainHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB5D432C419A88004236A1 /* MainHeaderViewModel.swift */; };
+		44AB5D462C426F04004236A1 /* MainCollectionTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB5D452C426F04004236A1 /* MainCollectionTableViewCellViewModel.swift */; };
+		44AB5D482C427F59004236A1 /* MainTableViewThreeHoursCollectionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB5D472C427F59004236A1 /* MainTableViewThreeHoursCollectionCellViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +67,8 @@
 		44AB5D3D2C418570004236A1 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		44AB5D3F2C41859C004236A1 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		44AB5D432C419A88004236A1 /* MainHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHeaderViewModel.swift; sourceTree = "<group>"; };
+		44AB5D452C426F04004236A1 /* MainCollectionTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		44AB5D472C427F59004236A1 /* MainTableViewThreeHoursCollectionCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewThreeHoursCollectionCellViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +210,8 @@
 			children = (
 				44AB5D3D2C418570004236A1 /* MainViewModel.swift */,
 				44AB5D432C419A88004236A1 /* MainHeaderViewModel.swift */,
+				44AB5D452C426F04004236A1 /* MainCollectionTableViewCellViewModel.swift */,
+				44AB5D472C427F59004236A1 /* MainTableViewThreeHoursCollectionCellViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -299,6 +305,7 @@
 				44520BE82C3E6F6C0004685D /* OpenWeatherAPI.swift in Sources */,
 				44AB5D2B2C3ED632004236A1 /* MainTableViewFiveDaysCollectionCell.swift in Sources */,
 				44520BF32C3EB8030004685D /* BaseTableViewCell.swift in Sources */,
+				44AB5D482C427F59004236A1 /* MainTableViewThreeHoursCollectionCellViewModel.swift in Sources */,
 				44520BEF2C3E89B00004685D /* WeatherForecast.swift in Sources */,
 				44520BF92C3EC0D80004685D /* MainTableViewThreeHoursCollectionCell.swift in Sources */,
 				44AB5D402C41859C004236A1 /* Observable.swift in Sources */,
@@ -306,6 +313,7 @@
 				44AB5D2F2C3F565A004236A1 /* MainTableViewOtherInformationCollectionCell.swift in Sources */,
 				44520BF12C3EB7DE0004685D /* MainHeaderCell.swift in Sources */,
 				44520BD72C3E6B5D0004685D /* BaseViewController.swift in Sources */,
+				44AB5D462C426F04004236A1 /* MainCollectionTableViewCellViewModel.swift in Sources */,
 				44520BE42C3E6D560004685D /* NetworkManager.swift in Sources */,
 				44AB5D442C419A88004236A1 /* MainHeaderViewModel.swift in Sources */,
 				44AB5D3E2C418570004236A1 /* MainViewModel.swift in Sources */,

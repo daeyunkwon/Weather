@@ -13,6 +13,8 @@ final class MainCollectionTableViewCell: BaseTableViewCell {
     
     //MARK: - Properties
     
+    let viewModel = MainCollectionTableViewCellViewModel()
+    
     enum CellType: Int {
         case threeHours
         case fiveDays
@@ -84,6 +86,20 @@ final class MainCollectionTableViewCell: BaseTableViewCell {
     
     //MARK: - Configurations
     
+    override func bindData() {
+        viewModel.outputThreeHoursForecastDataList.bind { _ in
+            self.collectionView.reloadData()
+        }
+        
+        viewModel.outputFiveDaysForecastDataList.bind { _ in
+            self.collectionView.reloadData()
+        }
+        
+        viewModel.outputWeatherCurrentData.bind { _ in
+            self.collectionView.reloadData()
+        }
+    }
+    
     override func configureUI() {
         super.configureUI()
     }
@@ -151,7 +167,14 @@ extension MainCollectionTableViewCell: UICollectionViewDataSource, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        switch cellType {
+        case .threeHours:
+            return viewModel.outputThreeHoursForecastDataList.value.count
+        case .fiveDays:
+            return viewModel.outputFiveDaysForecastDataList.value.count
+        case .other:
+            return 4
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -162,6 +185,7 @@ extension MainCollectionTableViewCell: UICollectionViewDataSource, UICollectionV
                 print("Failed to dequeue a MainCollectionTableViewCollectionell. Using default UICollectionViewCell.")
                 return UICollectionViewCell()
             }
+            cell.viewModel.inputData.value = viewModel.outputThreeHoursForecastDataList.value[indexPath.row]
             return cell
             
         case .fiveDays:

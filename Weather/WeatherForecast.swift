@@ -15,11 +15,19 @@ struct WeatherForecastResult: Decodable {
 struct WeatherForecast: Decodable {
     let main: Main
     let weather: [Weather]
-    let date: String
+    let dateText: String
     
     enum CodingKeys: String, CodingKey {
         case main
         case weather
-        case date = "dt_txt"
+        case dateText = "dt_txt"
+    }
+    
+    var date: Date? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        formatter.timeZone = TimeZone(identifier: "UTC")
+
+        return formatter.date(from: self.dateText)
     }
 }
