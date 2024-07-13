@@ -66,6 +66,11 @@ final class MainViewController: BaseViewController {
     
     //MARK: - Life Cycle
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -95,6 +100,7 @@ final class MainViewController: BaseViewController {
     
     override func setupNavi() {
         navigationItem.title = ""
+        navigationItem.largeTitleDisplayMode = .never
     }
     
     override func configureLayout() {
@@ -163,7 +169,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
-            return 250
+            return 270
         } else if indexPath.row == 2 {
             return 300
         } else if indexPath.row == 3 {

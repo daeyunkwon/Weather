@@ -21,6 +21,7 @@ final class MainHeaderCell: UITableViewHeaderFooterView {
         let label = UILabel()
         label.font = .systemFont(ofSize: 45)
         label.textColor = Constant.Color.labelColor
+        label.textAlignment = .center
         return label
     }()
     
@@ -62,6 +63,7 @@ final class MainHeaderCell: UITableViewHeaderFooterView {
         contentView.addSubview(cityNameLabel)
         cityNameLabel.snp.makeConstraints { make in
             make.top.equalTo(contentView.safeAreaLayoutGuide).offset(5)
+            make.horizontalEdges.equalToSuperview()
             make.centerX.equalToSuperview()
         }
         

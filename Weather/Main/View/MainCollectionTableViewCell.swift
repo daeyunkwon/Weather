@@ -12,6 +12,7 @@ import SnapKit
 final class MainCollectionTableViewCell: BaseTableViewCell {
     
     //MARK: - Properties
+    private var isFirstSetting = true
     
     let viewModel = MainCollectionTableViewCellViewModel()
     
@@ -35,7 +36,9 @@ final class MainCollectionTableViewCell: BaseTableViewCell {
             
             if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
                 switch cellType {
-                case .threeHours: flowLayout.scrollDirection = .horizontal
+                case .threeHours: 
+                    flowLayout.scrollDirection = .horizontal
+                    self.collectionView.isScrollEnabled = true
                 case .fiveDays, .other:
                     flowLayout.scrollDirection = .vertical
                     self.collectionView.isScrollEnabled = false
@@ -116,8 +119,9 @@ final class MainCollectionTableViewCell: BaseTableViewCell {
         case .threeHours, .fiveDays:
             contentView.addSubview(backView)
             backView.snp.makeConstraints { make in
-                make.top.bottom.equalToSuperview().inset(5)
-                make.horizontalEdges.equalToSuperview().inset(15)
+                make.top.equalToSuperview().offset(5)
+                make.bottom.equalToSuperview().offset(-5)
+                make.leading.trailing.equalToSuperview().inset(15)
             }
             
             backView.addSubview(titleButton)
@@ -129,19 +133,28 @@ final class MainCollectionTableViewCell: BaseTableViewCell {
             backView.addSubview(separatorLine)
             separatorLine.snp.makeConstraints { make in
                 make.top.equalTo(titleButton.snp.bottom).offset(10)
-                
-                switch cellType {
-                case .threeHours:
-                    make.leading.equalTo(titleButton.snp.leading).offset(0)
-                    make.trailing.equalTo(backView.snp.trailing)
-                case .fiveDays:
-                    make.horizontalEdges.equalToSuperview().inset(15)
-                case .other:
-                    break
-                }
-                
                 make.height.equalTo(0.2)
+                make.leading.equalTo(titleButton.snp.leading).offset(0)
+                
+                if isFirstSetting {
+                    if cellType == .threeHours {
+                        make.trailing.equalTo(backView.snp.trailing)
+                    } else if cellType == .fiveDays {
+                        make.trailing.equalTo(backView.snp.trailing).offset(-15)
+                    }
+                }
             }
+            
+            if !isFirstSetting {
+                separatorLine.snp.updateConstraints { make in
+                    if cellType == .threeHours {
+                        make.trailing.equalTo(backView.snp.trailing)
+                    } else if cellType == .fiveDays {
+                        make.trailing.equalTo(backView.snp.trailing).offset(-15)
+                    }
+                }
+            }
+            self.isFirstSetting = false
             
             backView.addSubview(collectionView)
             collectionView.snp.makeConstraints { make in

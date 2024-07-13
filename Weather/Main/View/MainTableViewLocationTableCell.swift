@@ -72,6 +72,10 @@ final class MainTableViewLocationTableCell: BaseTableViewCell {
             guard let lat = location["lat"] else { return }
             guard let lon = location["lon"] else { return }
             
+            if !self.mapView.annotations.isEmpty {
+                self.mapView.removeAnnotations(self.mapView.annotations)
+            }
+            
             let center = CLLocationCoordinate2D(latitude: lat, longitude: lon)
             
             self.addAnnotation(lat: lat, lon: lon)
