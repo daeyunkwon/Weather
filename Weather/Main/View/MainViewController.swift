@@ -154,11 +154,13 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
             return 250
-        }
-        if indexPath.row == 3 {
+        } else if indexPath.row == 2 {
+            return 300
+        } else if indexPath.row == 3 {
             return 520
+        } else {
+            return 400
         }
-        return 400
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -193,6 +195,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
                 print("Failed to dequeue a MainTableViewLocationTableCell. Using default UITableViewCell.")
                 return UITableViewCell()
             }
+            cell.viewModel.inputData.value = viewModel.outputWeatherCurrentData
             cell.selectionStyle = .none
             return cell
             
