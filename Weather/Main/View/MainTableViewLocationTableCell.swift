@@ -71,8 +71,7 @@ final class MainTableViewLocationTableCell: BaseTableViewCell {
         viewModel.outputLocationData.bind { location in
             guard let lat = location["lat"] else { return }
             guard let lon = location["lon"] else { return }
-            print(lat)
-            print(lon)
+            
             let center = CLLocationCoordinate2D(latitude: lat, longitude: lon)
             
             self.addAnnotation(lat: lat, lon: lon)

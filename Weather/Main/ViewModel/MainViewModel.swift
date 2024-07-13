@@ -17,12 +17,14 @@ final class MainViewModel {
     //MARK: - Inputs
     
     var inputFetchData = Observable<Void?>(nil)
+    var inputListButtonTapped = Observable<Void?>(nil)
     
     //MARK: - Ouputs
     
     private(set) var outputWeatherCurrentData: WeatherCurrent?
     private(set) var outputWeatherForecastData: WeatherForecastResult?
     private(set) var outputFetchDataCompletion = Observable<Bool>(false)
+    private(set) var outputPushCitySearchVC = Observable<Void?>(nil)
     
     //MARK: - Init
     
@@ -33,6 +35,10 @@ final class MainViewModel {
     private func transform() {
         inputFetchData.bind { _ in
             self.fetchData()
+        }
+        
+        inputListButtonTapped.bind { _ in
+            self.outputPushCitySearchVC.value = ()
         }
     }
     

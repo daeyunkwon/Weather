@@ -21,5 +21,6 @@ enum Constant {
         static let humidity = UIImage(systemName: "humidity")?.applyingSymbolConfiguration(.init(font: UIFont.systemFont(ofSize: 12)))
         static let map = UIImage(systemName: "map")
         static let list = UIImage(systemName: "list.bullet")
+        static let ellipsisCircle = UIImage(systemName: "ellipsis.circle")
     }
 }

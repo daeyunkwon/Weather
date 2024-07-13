@@ -11,11 +11,14 @@ class BaseViewController: UIViewController {
     
     override func viewDidLoad() {
         bindData()
+        setupNavi()
         configureLayout()
         configureUI()
     }
     
     func bindData() { }
+    
+    func setupNavi() { }
     
     func configureLayout() { }
     

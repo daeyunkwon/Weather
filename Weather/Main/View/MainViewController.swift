@@ -81,6 +81,16 @@ final class MainViewController: BaseViewController {
             }
             self.tableView.reloadData()
         }
+        
+        viewModel.outputPushCitySearchVC.bind { _ in
+            let vc = CitySearchViewController()
+            vc.viewModel.inputFetchData.value = ()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    override func setupNavi() {
+        navigationItem.title = ""
     }
     
     override func configureLayout() {
@@ -124,10 +134,6 @@ final class MainViewController: BaseViewController {
         }
     }
     
-    override func configureUI() {
-        super.configureUI()
-    }
-    
     //MARK: - Functions
     
     @objc private func mapButtonTapped() {
@@ -135,7 +141,7 @@ final class MainViewController: BaseViewController {
     }
 
     @objc private func listButtonTapped() {
-        print(#function)
+        viewModel.inputListButtonTapped.value = ()
     }
 
 }
