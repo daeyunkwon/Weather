@@ -32,13 +32,15 @@ final class CustomAnnotationView: MKAnnotationView {
     
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .label
         label.text = "현재 위치"
-        label.font = .systemFont(ofSize: 12, weight: .heavy)
-        label.layer.shadowColor = UIColor.systemBlue.cgColor
-        label.layer.shadowOffset = CGSize(width: 0, height: 0)
-        label.layer.shadowRadius = 0.3
-        label.layer.shadowOpacity = 1.0
+        label.font = .systemFont(ofSize: 15, weight: .heavy)
+        return label
+    }()
+    
+    private var strokeTitleLabel: UILabel = {
+        let label = UILabel()
+        label.attributedText = NSAttributedString(string: "현재 위치", attributes: [.strokeColor: UIColor.systemBackground, .strokeWidth: 2, .font: UIFont.systemFont(ofSize: 15, weight: .heavy)])
         return label
     }()
     
@@ -77,6 +79,12 @@ final class CustomAnnotationView: MKAnnotationView {
         
         self.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(backView.snp.bottom).offset(0)
+            make.centerX.equalTo(backView.snp.centerX)
+        }
+        
+        self.addSubview(strokeTitleLabel)
+        strokeTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(backView.snp.bottom).offset(0)
             make.centerX.equalTo(backView.snp.centerX)
         }
