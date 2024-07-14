@@ -21,12 +21,17 @@ final class CitySearchViewController: BaseViewController {
         let searchBar = UISearchBar()
         searchBar.placeholder = "Search for a city."
         searchBar.backgroundImage = UIImage()
+        searchBar.searchTextField.addTarget(self, action: #selector(searchBarTextChanged), for: .editingChanged)
+        searchBar.searchTextField.addTarget(self, action: #selector(searchBarTextFieldReturnKeyTapped), for: .editingDidEndOnExit)
+        searchBar.searchTextField.autocorrectionType = .no
+        searchBar.searchTextField.autocapitalizationType = .none
         return searchBar
     }()
     
     private lazy var tableView: UITableView = {
         let tv = UITableView()
         tv.separatorStyle = .none
+        tv.keyboardDismissMode = .onDrag
         tv.delegate = self
         tv.dataSource = self
         tv.register(CitySearchTableViewCell.self, forCellReuseIdentifier: CitySearchTableViewCell.identifier)
@@ -42,7 +47,7 @@ final class CitySearchViewController: BaseViewController {
     //MARK: - Configurations
     
     override func bindData() {
-        viewModel.outputCityDatas.bind { cities in
+        viewModel.outputFilteredCityDatas.bind { cities in
             self.tableView.reloadData()
         }
     }
@@ -81,6 +86,15 @@ final class CitySearchViewController: BaseViewController {
     @objc private func rightBarButtonTapped() {
         print(#function)
     }
+    
+    @objc private func searchBarTextChanged(searchText: UITextField) {
+        guard let text = searchText.text else { return }
+        viewModel.inputSearchTextChanged.value = text
+    }
+    
+    @objc private func searchBarTextFieldReturnKeyTapped() {
+        self.searchBar.endEditing(true)
+    }
 }
 
 //MARK: - UITableViewDataSource, UITableViewDelegate
@@ -91,7 +105,7 @@ extension CitySearchViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.outputCityDatas.value.count
+        return viewModel.outputFilteredCityDatas.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -99,12 +113,12 @@ extension CitySearchViewController: UITableViewDataSource, UITableViewDelegate {
             print("Failed to dequeue a CitySearchTableViewCell. Using default UITableViewCell.")
             return UITableViewCell()
         }
-        cell.viewModel.inputCityData.value = viewModel.outputCityDatas.value[indexPath.row]
+        cell.viewModel.inputCityData.value = viewModel.outputFilteredCityDatas.value[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.inputCellSelected.value = viewModel.outputCityDatas.value[indexPath.row]
+        viewModel.inputCellSelected.value = viewModel.outputFilteredCityDatas.value[indexPath.row]
         tableView.reloadRows(at: [indexPath], with: .automatic)
         self.popViewController()
     }
