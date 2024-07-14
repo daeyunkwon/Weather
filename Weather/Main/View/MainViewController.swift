@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Lottie
 import SnapKit
 
 final class MainViewController: BaseViewController {
@@ -16,6 +17,15 @@ final class MainViewController: BaseViewController {
     let viewModel = MainViewModel()
     
     //MARK: - UI Components
+    
+    private let indicatorAnimationView: LottieAnimationView = {
+        let view = LottieAnimationView(name: "indicatorAnimation")
+        view.contentMode = .scaleAspectFill
+        view.isHidden = true
+        view.loopMode = .loop
+        view.stop()
+        return view
+    }()
     
     private let backView: UIImageView = {
         let iv = UIImageView()
@@ -80,18 +90,27 @@ final class MainViewController: BaseViewController {
     override func bindData() {
         viewModel.inputFetchData.value = ()
         
+        indicatorAnimationView.isHidden = false
+        indicatorAnimationView.play()
+        
         viewModel.outputFetchDataCompletion.bind { _ in
             if self.viewModel.outputWeatherCurrentData == nil || self.viewModel.outputWeatherForecastData == nil {
                 self.showNetworkFailAlert(type: .failedResponse)
             }
             self.tableView.reloadData()
+            
+            self.indicatorAnimationView.isHidden = true
+            self.indicatorAnimationView.stop()
         }
         
         viewModel.outputPushCitySearchVC.bind { _ in
             let vc = CitySearchViewController()
             vc.viewModel.inputFetchData.value = ()
+            
             vc.viewModel.closureDataSendToMainVC = { [weak self] sender in
                 guard let self else { return }
+                self.indicatorAnimationView.isHidden = false
+                self.indicatorAnimationView.play()
                 self.viewModel.inputFetchDataWithSelectedCity.value = sender
             }
             self.pushViewController(vc: vc)
@@ -141,6 +160,12 @@ final class MainViewController: BaseViewController {
             make.top.equalToSuperview().offset(5)
             make.trailing.equalToSuperview().inset(15)
             make.size.equalTo(50)
+        }
+        
+        view.addSubview(indicatorAnimationView)
+        indicatorAnimationView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.size.equalTo(150)
         }
     }
     

@@ -48,6 +48,8 @@
 		44AB5D5E2C42EA7F004236A1 /* CitySearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB5D5D2C42EA7F004236A1 /* CitySearchViewModel.swift */; };
 		44AB5D602C42F008004236A1 /* CitySearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB5D5F2C42F008004236A1 /* CitySearchTableViewCell.swift */; };
 		44AB5D622C42F151004236A1 /* CitySearchTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB5D612C42F151004236A1 /* CitySearchTableViewCellViewModel.swift */; };
+		44AB5D6A2C43C51C004236A1 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 44AB5D692C43C51C004236A1 /* Lottie */; };
+		44AB5D6C2C43C59B004236A1 /* indicatorAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 44AB5D6B2C43C59B004236A1 /* indicatorAnimation.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +93,7 @@
 		44AB5D5D2C42EA7F004236A1 /* CitySearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySearchViewModel.swift; sourceTree = "<group>"; };
 		44AB5D5F2C42F008004236A1 /* CitySearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySearchTableViewCell.swift; sourceTree = "<group>"; };
 		44AB5D612C42F151004236A1 /* CitySearchTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySearchTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		44AB5D6B2C43C59B004236A1 /* indicatorAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = indicatorAnimation.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +104,7 @@
 				44520BE02C3E6CB40004685D /* Kingfisher in Frameworks */,
 				44520BDA2C3E6C520004685D /* SnapKit in Frameworks */,
 				44520BDD2C3E6CA70004685D /* Alamofire in Frameworks */,
+				44AB5D6A2C43C51C004236A1 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,6 +144,7 @@
 		44520BCD2C3E69AB0004685D /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				44AB5D6B2C43C59B004236A1 /* indicatorAnimation.json */,
 				44AB5D592C42E979004236A1 /* CityList.json */,
 				44520BC22C3E68BE0004685D /* Assets.xcassets */,
 				44520BC42C3E68BE0004685D /* LaunchScreen.storyboard */,
@@ -269,6 +274,7 @@
 				44520BD92C3E6C520004685D /* SnapKit */,
 				44520BDC2C3E6CA70004685D /* Alamofire */,
 				44520BDF2C3E6CB40004685D /* Kingfisher */,
+				44AB5D692C43C51C004236A1 /* Lottie */,
 			);
 			productName = Weather;
 			productReference = 44520BB62C3E68BC0004685D /* Weather.app */;
@@ -302,6 +308,7 @@
 				44520BD82C3E6C520004685D /* XCRemoteSwiftPackageReference "SnapKit" */,
 				44520BDB2C3E6CA70004685D /* XCRemoteSwiftPackageReference "Alamofire" */,
 				44520BDE2C3E6CB40004685D /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				44AB5D682C43C51C004236A1 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 44520BB72C3E68BC0004685D /* Products */;
 			projectDirPath = "";
@@ -318,6 +325,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				44520BC32C3E68BE0004685D /* Assets.xcassets in Resources */,
+				44AB5D6C2C43C59B004236A1 /* indicatorAnimation.json in Resources */,
 				44520BD12C3E6A2A0004685D /* .gitignore in Resources */,
 				44AB5D5A2C42E979004236A1 /* CityList.json in Resources */,
 				44520BC62C3E68BE0004685D /* Base in Resources */,
@@ -613,6 +621,14 @@
 				minimumVersion = 7.12.0;
 			};
 		};
+		44AB5D682C43C51C004236A1 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -630,6 +646,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 44520BDE2C3E6CB40004685D /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		44AB5D692C43C51C004236A1 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 44AB5D682C43C51C004236A1 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
