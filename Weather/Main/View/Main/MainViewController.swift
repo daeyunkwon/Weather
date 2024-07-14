@@ -115,6 +115,18 @@ final class MainViewController: BaseViewController {
             }
             self.pushViewController(vc: vc)
         }
+        
+        viewModel.outputPresentMapVC.bind { _ in
+            let vc = MapViewController()
+            vc.viewModel.closureDataSendToMainVC = {[weak self] lat, lon in
+                guard let self else { return }
+                self.indicatorAnimationView.isHidden = false
+                self.indicatorAnimationView.play()
+                self.viewModel.inputFetchDataWithCoordinate.value = [lat, lon]
+            }
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
+        }
     }
     
     override func setupNavi() {
@@ -172,7 +184,7 @@ final class MainViewController: BaseViewController {
     //MARK: - Functions
     
     @objc private func mapButtonTapped() {
-        print(#function)
+        viewModel.inputMapButtonTapped.value = ()
     }
 
     @objc private func listButtonTapped() {

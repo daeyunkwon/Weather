@@ -14,8 +14,11 @@ final class MainViewModel {
     var inputFetchData = Observable<Void?>(nil)
     
     var inputListButtonTapped = Observable<Void?>(nil)
+    var inputMapButtonTapped = Observable<Void?>(nil)
     
     var inputFetchDataWithSelectedCity = Observable<City?>(nil)
+    
+    var inputFetchDataWithCoordinate = Observable<[Double]>([])
     
     //MARK: - Ouputs
     
@@ -23,6 +26,7 @@ final class MainViewModel {
     private(set) var outputWeatherForecastData: WeatherForecastResult?
     private(set) var outputFetchDataCompletion = Observable<Bool>(false)
     private(set) var outputPushCitySearchVC = Observable<Void?>(nil)
+    private(set) var outputPresentMapVC = Observable<Void?>(nil)
     
     //MARK: - Init
     
@@ -39,9 +43,19 @@ final class MainViewModel {
             self.outputPushCitySearchVC.value = ()
         }
         
+        inputMapButtonTapped.bind { _ in
+            self.outputPresentMapVC.value = ()
+        }
+        
         inputFetchDataWithSelectedCity.bind { city in
             guard let data = city else { return }
             self.fetchData(lat: data.coord.lat, lon: data.coord.lon)
+        }
+        
+        inputFetchDataWithCoordinate.bind { values in
+            if values.count == 2 {
+                self.fetchData(lat: values[0], lon: values[1])
+            }
         }
     }
     
