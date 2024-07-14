@@ -50,6 +50,8 @@
 		44AB5D622C42F151004236A1 /* CitySearchTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB5D612C42F151004236A1 /* CitySearchTableViewCellViewModel.swift */; };
 		44AB5D6A2C43C51C004236A1 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 44AB5D692C43C51C004236A1 /* Lottie */; };
 		44AB5D6C2C43C59B004236A1 /* indicatorAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 44AB5D6B2C43C59B004236A1 /* indicatorAnimation.json */; };
+		44AB5D7B2C43CC98004236A1 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB5D7A2C43CC98004236A1 /* MapViewController.swift */; };
+		44AB5D7D2C440A7A004236A1 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB5D7C2C440A7A004236A1 /* MapViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +96,8 @@
 		44AB5D5F2C42F008004236A1 /* CitySearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySearchTableViewCell.swift; sourceTree = "<group>"; };
 		44AB5D612C42F151004236A1 /* CitySearchTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySearchTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		44AB5D6B2C43C59B004236A1 /* indicatorAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = indicatorAnimation.json; sourceTree = "<group>"; };
+		44AB5D7A2C43CC98004236A1 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		44AB5D7C2C440A7A004236A1 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,22 +227,24 @@
 		44AB5D412C4198A7004236A1 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				44520BBD2C3E68BC0004685D /* MainViewController.swift */,
-				44520BF02C3EB7DE0004685D /* MainHeaderCell.swift */,
-				44520BF62C3EBBFB0004685D /* MainCollectionTableViewCell.swift */,
-				44520BF82C3EC0D80004685D /* MainTableViewThreeHoursCollectionCell.swift */,
-				44AB5D2A2C3ED632004236A1 /* MainTableViewFiveDaysCollectionCell.swift */,
-				44AB5D2C2C3EE2CD004236A1 /* MainTableViewLocationTableCell.swift */,
-				44AB5D2E2C3F565A004236A1 /* MainTableViewOtherInformationCollectionCell.swift */,
-				44AB5D4F2C42BD5A004236A1 /* CustomAnnotationView.swift */,
-				44AB5D512C42C2FA004236A1 /* CustomAnnotation.swift */,
-				44AB5D572C42E086004236A1 /* CitySearchViewController.swift */,
-				44AB5D5F2C42F008004236A1 /* CitySearchTableViewCell.swift */,
+				44AB5D752C43CC25004236A1 /* Main */,
+				44AB5D762C43CC35004236A1 /* CitySearch */,
+				44AB5D772C43CC46004236A1 /* Map */,
 			);
 			path = View;
 			sourceTree = "<group>";
 		};
 		44AB5D422C4198B6004236A1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				44AB5D732C43CC11004236A1 /* Main */,
+				44AB5D742C43CC19004236A1 /* CitySearch */,
+				44AB5D792C43CC76004236A1 /* Map */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		44AB5D732C43CC11004236A1 /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				44AB5D3D2C418570004236A1 /* MainViewModel.swift */,
@@ -248,10 +254,58 @@
 				44AB5D492C429818004236A1 /* MainTableViewFiveDaysCollectionCellViewModel.swift */,
 				44AB5D4D2C42B4C4004236A1 /* MainTableViewLocationTableCellViewModel.swift */,
 				44AB5D4B2C42AD18004236A1 /* MainTableViewOtherInformationCollectionCellViewModel.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		44AB5D742C43CC19004236A1 /* CitySearch */ = {
+			isa = PBXGroup;
+			children = (
 				44AB5D5D2C42EA7F004236A1 /* CitySearchViewModel.swift */,
 				44AB5D612C42F151004236A1 /* CitySearchTableViewCellViewModel.swift */,
 			);
-			path = ViewModel;
+			path = CitySearch;
+			sourceTree = "<group>";
+		};
+		44AB5D752C43CC25004236A1 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				44520BBD2C3E68BC0004685D /* MainViewController.swift */,
+				44520BF02C3EB7DE0004685D /* MainHeaderCell.swift */,
+				44520BF62C3EBBFB0004685D /* MainCollectionTableViewCell.swift */,
+				44520BF82C3EC0D80004685D /* MainTableViewThreeHoursCollectionCell.swift */,
+				44AB5D2A2C3ED632004236A1 /* MainTableViewFiveDaysCollectionCell.swift */,
+				44AB5D2C2C3EE2CD004236A1 /* MainTableViewLocationTableCell.swift */,
+				44AB5D2E2C3F565A004236A1 /* MainTableViewOtherInformationCollectionCell.swift */,
+				44AB5D4F2C42BD5A004236A1 /* CustomAnnotationView.swift */,
+				44AB5D512C42C2FA004236A1 /* CustomAnnotation.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		44AB5D762C43CC35004236A1 /* CitySearch */ = {
+			isa = PBXGroup;
+			children = (
+				44AB5D572C42E086004236A1 /* CitySearchViewController.swift */,
+				44AB5D5F2C42F008004236A1 /* CitySearchTableViewCell.swift */,
+			);
+			path = CitySearch;
+			sourceTree = "<group>";
+		};
+		44AB5D772C43CC46004236A1 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				44AB5D7A2C43CC98004236A1 /* MapViewController.swift */,
+			);
+			name = Map;
+			sourceTree = "<group>";
+		};
+		44AB5D792C43CC76004236A1 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				44AB5D7C2C440A7A004236A1 /* MapViewModel.swift */,
+			);
+			path = Map;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -352,6 +406,7 @@
 				44AB5D482C427F59004236A1 /* MainTableViewThreeHoursCollectionCellViewModel.swift in Sources */,
 				44AB5D502C42BD5A004236A1 /* CustomAnnotationView.swift in Sources */,
 				44520BEF2C3E89B00004685D /* WeatherForecast.swift in Sources */,
+				44AB5D7B2C43CC98004236A1 /* MapViewController.swift in Sources */,
 				44520BF92C3EC0D80004685D /* MainTableViewThreeHoursCollectionCell.swift in Sources */,
 				44AB5D4A2C429818004236A1 /* MainTableViewFiveDaysCollectionCellViewModel.swift in Sources */,
 				44AB5D402C41859C004236A1 /* Observable.swift in Sources */,
@@ -373,6 +428,7 @@
 				44AB5D622C42F151004236A1 /* CitySearchTableViewCellViewModel.swift in Sources */,
 				44520BF52C3EB87B0004685D /* BaseCollectionViewCell.swift in Sources */,
 				44520BBC2C3E68BC0004685D /* SceneDelegate.swift in Sources */,
+				44AB5D7D2C440A7A004236A1 /* MapViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

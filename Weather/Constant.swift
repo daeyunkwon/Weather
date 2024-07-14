@@ -22,5 +22,6 @@ enum Constant {
         static let map = UIImage(systemName: "map")
         static let list = UIImage(systemName: "list.bullet")
         static let ellipsisCircle = UIImage(systemName: "ellipsis.circle")
+        static let xmark = UIImage(systemName: "xmark")
     }
 }
