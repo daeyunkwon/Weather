@@ -59,6 +59,24 @@ final class MainHeaderCell: UITableViewHeaderFooterView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func bind() {
+        viewModel.outputCityName.bind { value in
+            self.cityNameLabel.text = value
+        }
+        
+        viewModel.outputTemp.bind { value in
+            self.mainTempLabel.text = value
+        }
+        
+        viewModel.outputDescription.bind { value in
+            self.descriptionLabel.text = value
+        }
+        
+        viewModel.outputSubTemp.bind { value in
+            self.subTempLabel.text = value
+        }
+    }
+    
     private func configureLayout() {
         contentView.addSubview(cityNameLabel)
         cityNameLabel.snp.makeConstraints { make in
@@ -86,21 +104,28 @@ final class MainHeaderCell: UITableViewHeaderFooterView {
         }
     }
     
-    private func bind() {
-        viewModel.outputCityName.bind { value in
-            self.cityNameLabel.text = value
-        }
+    func executeAnimation() {
+        let duration = 0.5
+        self.cityNameLabel.alpha = 0
+        self.mainTempLabel.alpha = 0
+        self.descriptionLabel.alpha = 0
+        self.subTempLabel.alpha = 0
         
-        viewModel.outputTemp.bind { value in
-            self.mainTempLabel.text = value
-        }
-        
-        viewModel.outputDescription.bind { value in
-            self.descriptionLabel.text = value
-        }
-        
-        viewModel.outputSubTemp.bind { value in
-            self.subTempLabel.text = value
+        UIView.animate(withDuration: duration, delay: 0.5) {
+            self.cityNameLabel.alpha = 1
+        } completion: { _ in
+            UIView.animate(withDuration: duration) {
+                self.mainTempLabel.alpha = 1
+            } completion: { _ in
+                UIView.animate(withDuration: duration) {
+                    self.descriptionLabel.alpha = 1
+                } completion: { _ in
+                    UIView.animate(withDuration: duration) {
+                        self.subTempLabel.alpha = 1
+                    }
+                }
+            }
         }
     }
+    
 }

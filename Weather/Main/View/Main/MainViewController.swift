@@ -16,6 +16,8 @@ final class MainViewController: BaseViewController {
     
     let viewModel = MainViewModel()
     
+    private var isAnimationEnabled = false
+    
     //MARK: - UI Components
     
     private let indicatorAnimationView: LottieAnimationView = {
@@ -101,6 +103,7 @@ final class MainViewController: BaseViewController {
             
             self.indicatorAnimationView.isHidden = true
             self.indicatorAnimationView.stop()
+            self.isAnimationEnabled = true
         }
         
         viewModel.outputPushCitySearchVC.bind { _ in
@@ -272,6 +275,15 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         }
         header.viewModel.inputData.value = self.viewModel.outputWeatherCurrentData
         return header
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        
+        if let header = view as? MainHeaderCell {
+            if self.isAnimationEnabled {
+                header.executeAnimation()
+            }
+        }
     }
 }
 
