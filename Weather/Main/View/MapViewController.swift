@@ -55,6 +55,11 @@ final class MapViewController: BaseViewController {
         }
     }
     
+    private func setupGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(getCoordinate))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
     override func configureLayout() {
         view.addSubview(mapView)
         mapView.snp.makeConstraints { make in
@@ -70,11 +75,6 @@ final class MapViewController: BaseViewController {
     }
     
     //MARK: - Functions
-    
-    private func setupGesture() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(getCoordinate))
-        view.addGestureRecognizer(tapGesture)
-    }
     
     @objc private func getCoordinate(_ tapGesture: UITapGestureRecognizer) {
         let touchPoint = tapGesture.location(in: mapView)
