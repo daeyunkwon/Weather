@@ -22,9 +22,13 @@ final class MapViewModel {
     
     var inputFetchWeatherCheckAlertOkAction = Observable<Void?>(nil)
     
+    var inputXmarkButtonTapped = Observable<Void?>(nil)
+    
     //MARK: - Ouputs
     
     private(set) var outputFetchWeatherCheckAlertOkAction = Observable<Void?>(nil)
+    
+    private(set) var outputXmarkButtonTapped = Observable<Void?>(nil)
     
     //MARK: - Init
     
@@ -45,6 +49,10 @@ final class MapViewModel {
                   let lon = self.lon else { return }
             self.closureDataSendToMainVC(lat, lon)
             self.outputFetchWeatherCheckAlertOkAction.value = ()
+        }
+        
+        inputXmarkButtonTapped.bind { _ in
+            self.outputXmarkButtonTapped.value = ()
         }
     }
     

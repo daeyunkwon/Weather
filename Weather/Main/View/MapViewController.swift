@@ -49,6 +49,10 @@ final class MapViewController: BaseViewController {
         viewModel.outputFetchWeatherCheckAlertOkAction.bind { _ in
             self.dismiss(animated: true)
         }
+        
+        viewModel.outputXmarkButtonTapped.bind { _ in
+            self.dismiss(animated: true)
+        }
     }
     
     override func configureLayout() {
@@ -80,7 +84,7 @@ final class MapViewController: BaseViewController {
     }
     
     @objc private func xmarkButtonTapped() {
-        dismiss(animated: true)
+        viewModel.inputXmarkButtonTapped.value = ()
     }
     
     private func addAnnotation(latitude: CLLocationDegrees, longitude: CLLocationDegrees, title: String) {
@@ -116,20 +120,20 @@ final class MapViewController: BaseViewController {
     }
     
     private func checkCurrentLocationAuthorization(status: CLAuthorizationStatus) {
-            switch status {
-            case .notDetermined:
-                locationManager.desiredAccuracy = kCLLocationAccuracyBest
-                locationManager.requestWhenInUseAuthorization()
-            case .denied:
-                showLocationSettingAlert()
-                self.addAnnotation(latitude: 37.6543567, longitude: 127.0497781, title: "도봉 캠퍼스")
-                self.mapView.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.6543567, longitude: 127.0497781), latitudinalMeters: 3000, longitudinalMeters: 3000), animated: true)
-            case .authorizedWhenInUse:
-                locationManager.startUpdatingLocation()
-            default:
-                print("Error:", #function)
-            }
+        switch status {
+        case .notDetermined:
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.requestWhenInUseAuthorization()
+        case .denied:
+            showLocationSettingAlert()
+            self.addAnnotation(latitude: 37.6543567, longitude: 127.0497781, title: "도봉 캠퍼스")
+            self.mapView.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.6543567, longitude: 127.0497781), latitudinalMeters: 3000, longitudinalMeters: 3000), animated: true)
+        case .authorizedWhenInUse:
+            locationManager.startUpdatingLocation()
+        default:
+            print("Error:", #function)
         }
+    }
     
     private func showLocationSettingAlert() {
         let alert = UIAlertController(title: "위치 정보 이용", message: "위치 서비스를 사용할 수 없습니다. 기기의 '설정 > 개인정보 보호'에서 위치 서비스를 켜주세요.(필수권한)", preferredStyle: .alert)
