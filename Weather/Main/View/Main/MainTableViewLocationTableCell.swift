@@ -68,7 +68,8 @@ final class MainTableViewLocationTableCell: BaseTableViewCell {
     }
     
     override func bindData() {
-        viewModel.outputLocationData.bind { location in
+        viewModel.outputLocationData.bind { [weak self] location in
+            guard let self else { return }
             guard let lat = location["lat"] else { return }
             guard let lon = location["lon"] else { return }
             
