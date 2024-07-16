@@ -47,8 +47,8 @@ final class CitySearchViewController: BaseViewController {
     //MARK: - Configurations
     
     override func bindData() {
-        viewModel.outputFilteredCityDatas.bind { cities in
-            self.tableView.reloadData()
+        viewModel.outputFilteredCityDatas.bind { [weak self] cities in
+            self?.tableView.reloadData()
         }
     }
     
