@@ -46,12 +46,12 @@ final class MapViewController: BaseViewController {
     //MARK: - Configurations
     
     override func bindData() {
-        viewModel.outputFetchWeatherCheckAlertOkAction.bind { _ in
-            self.dismiss(animated: true)
+        viewModel.outputFetchWeatherCheckAlertOkAction.bind { [weak self] _ in
+            self?.dismiss(animated: true)
         }
         
-        viewModel.outputXmarkButtonTapped.bind { _ in
-            self.dismiss(animated: true)
+        viewModel.outputXmarkButtonTapped.bind { [weak self] _ in
+            self?.dismiss(animated: true)
         }
     }
     
