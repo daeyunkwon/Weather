@@ -90,20 +90,20 @@ final class MainTableViewFiveDaysCollectionCell: BaseCollectionViewCell {
     }
     
     override func bindData() {
-        viewModel.outputDayOfTheWeek.bind { value in
-            self.dayOfTheWeekLabel.text = value
+        viewModel.outputDayOfTheWeek.bind { [weak self] value in
+            self?.dayOfTheWeekLabel.text = value
         }
         
-        viewModel.outputIconURL.bind { url in
-            self.iconImageView.kf.setImage(with: url)
+        viewModel.outputIconURL.bind { [weak self] url in
+            self?.iconImageView.kf.setImage(with: url)
         }
         
-        viewModel.outputMinTemperature.bind { value in
-            self.minTemperatureLabel.text = value
+        viewModel.outputMinTemperature.bind { [weak self] value in
+            self?.minTemperatureLabel.text = value
         }
         
-        viewModel.outputMaxTemperature.bind { value in
-            self.maxTemperatureLabel.text = value
+        viewModel.outputMaxTemperature.bind { [weak self] value in
+            self?.maxTemperatureLabel.text = value
         }
     }
     
