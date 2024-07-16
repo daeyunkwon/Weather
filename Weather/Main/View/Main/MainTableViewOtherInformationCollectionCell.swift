@@ -99,12 +99,12 @@ final class MainTableViewOtherInformationCollectionCell: BaseCollectionViewCell 
     }
     
     override func bindData() {
-        viewModel.outputInformation.bind { str in
-            self.informationLabel.text = str
+        viewModel.outputInformation.bind { [weak self] str in
+            self?.informationLabel.text = str
         }
         
-        viewModel.outputSubInformation.bind { str in
-            self.subInformationLabel.text = str
+        viewModel.outputSubInformation.bind { [weak self] str in
+            self?.subInformationLabel.text = str
         }
     }
     
