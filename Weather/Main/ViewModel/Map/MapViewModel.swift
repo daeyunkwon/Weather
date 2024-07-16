@@ -37,14 +37,15 @@ final class MapViewModel {
     }
     
     private func transform() {
-        inputAnnotationSelected.bind { value in
+        inputAnnotationSelected.bind { [weak self] value in
             if value.count == 2 {
-                self.lat = value[0]
-                self.lon = value[1]
+                self?.lat = value[0]
+                self?.lon = value[1]
             }
         }
         
-        inputFetchWeatherCheckAlertOkAction.bind { _ in
+        inputFetchWeatherCheckAlertOkAction.bind { [weak self] _ in
+            guard let self else { return }
             guard let lat = self.lat,
                   let lon = self.lon else { return }
             self.closureDataSendToMainVC(lat, lon)

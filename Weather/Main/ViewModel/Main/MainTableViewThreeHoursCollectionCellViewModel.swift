@@ -9,10 +9,6 @@ import UIKit
 
 final class MainTableViewThreeHoursCollectionCellViewModel {
     
-    
-    //MARK: - Properties
-    
-    
     //MARK: - Inputs
     
     var inputData = Observable<WeatherForecast?>(nil)
@@ -30,7 +26,8 @@ final class MainTableViewThreeHoursCollectionCellViewModel {
     }
     
     private func transform() {
-        inputData.bind { value in
+        inputData.bind { [weak self] value in
+            guard let self else { return }
             guard let data = value else { return }
             
             var calendar = Calendar.current

@@ -32,17 +32,19 @@ final class CitySearchViewModel {
     }
     
     private func transform() {
-        inputFetchData.bind { _ in
+        inputFetchData.bind { [weak self] _ in
+            guard let self else { return }
             self.outputCityDatas = self.loadJson(filename: "CityList")
             self.outputFilteredCityDatas.value = self.outputCityDatas
         }
         
-        inputCellSelected.bind { city in
+        inputCellSelected.bind { [weak self] city in
             guard let data = city else { return }
-            self.closureDataSendToMainVC(data)
+            self?.closureDataSendToMainVC(data)
         }
         
-        inputSearchTextChanged.bind { text in
+        inputSearchTextChanged.bind { [weak self] text in
+            guard let self else { return }
             if text.trimmingCharacters(in: .whitespaces).isEmpty {
                 self.outputFilteredCityDatas.value = self.outputCityDatas
             } else {

@@ -35,7 +35,8 @@ final class MainTableViewOtherInformationCollectionCellViewModel {
     }
     
     private func transform() {
-        inputData.bind { weatherCurrent in
+        inputData.bind { [weak self] weatherCurrent in
+            guard let self else { return }
             guard let data = weatherCurrent else { return }
             
             switch self.cellType {
@@ -52,8 +53,6 @@ final class MainTableViewOtherInformationCollectionCellViewModel {
             case .humidity:
                 self.outputInformation.value = "\(data.main.humidity)%"
             }
-            
-            
         }
     }
     

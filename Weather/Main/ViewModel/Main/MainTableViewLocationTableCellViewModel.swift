@@ -16,7 +16,7 @@ final class MainTableViewLocationTableCellViewModel {
     //MARK: - Ouputs
     
     private(set) var outputLocationData = Observable<[String: Double]>([:])
-    var outputTemp: String = ""
+    private(set) var outputTemp: String = ""
     
     //MARK: - Init
     
@@ -25,7 +25,8 @@ final class MainTableViewLocationTableCellViewModel {
     }
     
     private func transform() {
-        inputData.bind { weatherCurrent in
+        inputData.bind { [weak self] weatherCurrent in
+            guard let self else { return }
             guard let data = weatherCurrent else { return }
             
             let locationDict = ["lat": data.coord.lat, "lon": data.coord.lon]

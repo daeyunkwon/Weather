@@ -22,7 +22,8 @@ final class MainHeaderViewModel {
     }
     
     private func transform() {
-        inputData.bind { weather in
+        inputData.bind { [weak self] weather in
+            guard let self else { return }
             guard let data = weather else { return }
             self.outputCityName.value = data.name
             self.outputTemp.value = self.convertTempString(temp: data.main.temp, decimalCount: 2)

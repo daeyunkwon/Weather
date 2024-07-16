@@ -35,26 +35,26 @@ final class MainViewModel {
     }
     
     private func transform() {
-        inputFetchData.bind { _ in
-            self.fetchData(lat: 37.583328, lon: 127.0) //Seoul
+        inputFetchData.bind { [weak self] _ in
+            self?.fetchData(lat: 37.583328, lon: 127.0) //Seoul
         }
         
-        inputListButtonTapped.bind { _ in
-            self.outputPushCitySearchVC.value = ()
+        inputListButtonTapped.bind { [weak self] _ in
+            self?.outputPushCitySearchVC.value = ()
         }
         
-        inputMapButtonTapped.bind { _ in
-            self.outputPresentMapVC.value = ()
+        inputMapButtonTapped.bind { [weak self] _ in
+            self?.outputPresentMapVC.value = ()
         }
         
-        inputFetchDataWithSelectedCity.bind { city in
+        inputFetchDataWithSelectedCity.bind { [weak self] city in
             guard let data = city else { return }
-            self.fetchData(lat: data.coord.lat, lon: data.coord.lon)
+            self?.fetchData(lat: data.coord.lat, lon: data.coord.lon)
         }
         
-        inputFetchDataWithCoordinate.bind { values in
+        inputFetchDataWithCoordinate.bind { [weak self] values in
             if values.count == 2 {
-                self.fetchData(lat: values[0], lon: values[1])
+                self?.fetchData(lat: values[0], lon: values[1])
             }
         }
     }
@@ -67,14 +67,14 @@ final class MainViewModel {
         
         group.enter()
         DispatchQueue.global().async(group: group) {
-            NetworkManager.shared.fetchData(api: .current(lat: lat, lon: lon), model: WeatherCurrent.self) { result in
+            NetworkManager.shared.fetchData(api: .current(lat: lat, lon: lon), model: WeatherCurrent.self) { [weak self] result in
                 switch result {
                 case .success(let value):
-                    self.outputWeatherCurrentData = value
+                    self?.outputWeatherCurrentData = value
                     group.leave()
                     
                 case .failure(let error):
-                    self.outputWeatherCurrentData = nil
+                    self?.outputWeatherCurrentData = nil
                     print(error)
                     group.leave()
                 }
@@ -83,22 +83,22 @@ final class MainViewModel {
         
         group.enter()
         DispatchQueue.global().async(group: group) {
-            NetworkManager.shared.fetchData(api: .forecast(lat: lat, lon: lon), model: WeatherForecastResult.self) { result in
+            NetworkManager.shared.fetchData(api: .forecast(lat: lat, lon: lon), model: WeatherForecastResult.self) { [weak self] result in
                 switch result {
                 case .success(let value):
-                    self.outputWeatherForecastData = value
+                    self?.outputWeatherForecastData = value
                     group.leave()
                     
                 case .failure(let error):
-                    self.outputWeatherForecastData = nil
+                    self?.outputWeatherForecastData = nil
                     print(error)
                     group.leave()
                 }
             }
         }
         
-        group.notify(queue: .main) {
-            self.outputFetchDataCompletion.value = true
+        group.notify(queue: .main) { [weak self] in
+            self?.outputFetchDataCompletion.value = true
         }
     }
     

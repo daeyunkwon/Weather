@@ -25,7 +25,8 @@ final class CitySearchTableViewCellViewModel {
     }
     
     private func transform() {
-        self.inputCityData.bind { city in
+        self.inputCityData.bind { [weak self] city in
+            guard let self else { return }
             guard let data = city else { return }
             
             self.outputCountry.value = data.country

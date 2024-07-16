@@ -27,7 +27,8 @@ final class MainTableViewFiveDaysCollectionCellViewModel {
     }
     
     private func transform() {
-        inputData.bind { list in
+        inputData.bind { [weak self] list in
+            guard let self else { return }
             guard let list = list else { return }
             
             self.getDayOfTheWeekFromDate(date: list.date ?? Date())

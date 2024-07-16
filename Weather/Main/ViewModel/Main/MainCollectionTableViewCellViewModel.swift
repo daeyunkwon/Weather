@@ -28,13 +28,13 @@ final class MainCollectionTableViewCellViewModel {
     }
     
     private func transform() {
-        inputWeatherCurrentData.bind { data in
-            self.outputWeatherCurrentData.value = data
+        inputWeatherCurrentData.bind { [weak self] data in
+            self?.outputWeatherCurrentData.value = data
         }
         
-        inputWeatherForecastData.bind { list in
+        inputWeatherForecastData.bind { [weak self] list in
             guard let forecastDatas = list?.list else { return }
-            self.classifyDataList(dataList: forecastDatas)
+            self?.classifyDataList(dataList: forecastDatas)
         }
     }
     
