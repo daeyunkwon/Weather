@@ -60,20 +60,20 @@ final class MainHeaderCell: UITableViewHeaderFooterView {
     }
     
     private func bind() {
-        viewModel.outputCityName.bind { value in
-            self.cityNameLabel.text = value
+        viewModel.outputCityName.bind { [weak self] value in
+            self?.cityNameLabel.text = value
         }
         
-        viewModel.outputTemp.bind { value in
-            self.mainTempLabel.text = value
+        viewModel.outputTemp.bind { [weak self] value in
+            self?.mainTempLabel.text = value
         }
         
-        viewModel.outputDescription.bind { value in
-            self.descriptionLabel.text = value
+        viewModel.outputDescription.bind { [weak self] value in
+            self?.descriptionLabel.text = value
         }
         
-        viewModel.outputSubTemp.bind { value in
-            self.subTempLabel.text = value
+        viewModel.outputSubTemp.bind { [weak self] value in
+            self?.subTempLabel.text = value
         }
     }
     
@@ -111,17 +111,17 @@ final class MainHeaderCell: UITableViewHeaderFooterView {
         self.descriptionLabel.alpha = 0
         self.subTempLabel.alpha = 0
         
-        UIView.animate(withDuration: duration, delay: 0.5) {
-            self.cityNameLabel.alpha = 1
+        UIView.animate(withDuration: duration, delay: 0.5) { [weak self] in
+            self?.cityNameLabel.alpha = 1
         } completion: { _ in
-            UIView.animate(withDuration: duration) {
-                self.mainTempLabel.alpha = 1
+            UIView.animate(withDuration: duration) { [weak self] in
+                self?.mainTempLabel.alpha = 1
             } completion: { _ in
-                UIView.animate(withDuration: duration) {
-                    self.descriptionLabel.alpha = 1
+                UIView.animate(withDuration: duration) { [weak self] in
+                    self?.descriptionLabel.alpha = 1
                 } completion: { _ in
-                    UIView.animate(withDuration: duration) {
-                        self.subTempLabel.alpha = 1
+                    UIView.animate(withDuration: duration) { [weak self] in
+                        self?.subTempLabel.alpha = 1
                     }
                 }
             }
