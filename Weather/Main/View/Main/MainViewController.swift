@@ -95,7 +95,8 @@ final class MainViewController: BaseViewController {
         indicatorAnimationView.isHidden = false
         indicatorAnimationView.play()
         
-        viewModel.outputFetchDataCompletion.bind { _ in
+        viewModel.outputFetchDataCompletion.bind { [weak self] _ in
+            guard let self else { return }
             if self.viewModel.outputWeatherCurrentData == nil || self.viewModel.outputWeatherForecastData == nil {
                 self.showNetworkFailAlert(type: .failedResponse)
             }
@@ -106,7 +107,8 @@ final class MainViewController: BaseViewController {
             self.isAnimationEnabled = true
         }
         
-        viewModel.outputPushCitySearchVC.bind { _ in
+        viewModel.outputPushCitySearchVC.bind { [weak self] _ in
+            guard let self else { return }
             let vc = CitySearchViewController()
             vc.viewModel.inputFetchData.value = ()
             
@@ -119,7 +121,8 @@ final class MainViewController: BaseViewController {
             self.pushViewController(vc: vc)
         }
         
-        viewModel.outputPresentMapVC.bind { _ in
+        viewModel.outputPresentMapVC.bind { [weak self] _ in
+            guard let self else { return }
             let vc = MapViewController()
             vc.viewModel.closureDataSendToMainVC = {[weak self] lat, lon in
                 guard let self else { return }
