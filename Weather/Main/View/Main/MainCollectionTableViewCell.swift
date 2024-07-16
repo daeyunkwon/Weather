@@ -90,16 +90,16 @@ final class MainCollectionTableViewCell: BaseTableViewCell {
     //MARK: - Configurations
     
     override func bindData() {
-        viewModel.outputThreeHoursForecastDataList.bind { _ in
-            self.collectionView.reloadData()
+        viewModel.outputThreeHoursForecastDataList.bind { [weak self] _ in
+            self?.collectionView.reloadData()
         }
         
-        viewModel.outputFiveDaysForecastDataList.bind { _ in
-            self.collectionView.reloadData()
+        viewModel.outputFiveDaysForecastDataList.bind { [weak self] _ in
+            self?.collectionView.reloadData()
         }
         
-        viewModel.outputWeatherCurrentData.bind { _ in
-            self.collectionView.reloadData()
+        viewModel.outputWeatherCurrentData.bind { [weak self] _ in
+            self?.collectionView.reloadData()
         }
     }
     
