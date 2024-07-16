@@ -74,12 +74,12 @@ final class CitySearchTableViewCell: BaseTableViewCell {
     }
     
     override func bindData() {
-        viewModel.outputCityName.bind { str in
-            self.titleLabel.text = str
+        viewModel.outputCityName.bind { [weak self] str in
+            self?.titleLabel.text = str
         }
         
-        viewModel.outputCountry.bind { str in
-            self.subTitleLabel.text = str
+        viewModel.outputCountry.bind { [weak self] str in
+            self?.subTitleLabel.text = str
         }
     }
 }
