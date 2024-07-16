@@ -68,16 +68,16 @@ final class MainTableViewThreeHoursCollectionCell: BaseCollectionViewCell {
     }
     
     override func bindData() {
-        viewModel.outputHour.bind { value in
-            self.hourLabel.text = value
+        viewModel.outputHour.bind { [weak self] value in
+            self?.hourLabel.text = value
         }
         
-        viewModel.outputIconImageURL.bind { image in
-            self.iconImageView.kf.setImage(with: image)
+        viewModel.outputIconImageURL.bind { [weak self] image in
+            self?.iconImageView.kf.setImage(with: image)
         }
         
-        viewModel.outputTemp.bind { value in
-            self.tempLabel.text = value
+        viewModel.outputTemp.bind { [weak self] value in
+            self?.tempLabel.text = value
         }
     }
     
