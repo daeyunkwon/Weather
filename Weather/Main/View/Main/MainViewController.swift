@@ -80,7 +80,13 @@ final class MainViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationItem.largeTitleDisplayMode = .never
         self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationItem.largeTitleDisplayMode = .always
     }
     
     override func viewDidLoad() {
@@ -137,7 +143,8 @@ final class MainViewController: BaseViewController {
     
     override func setupNavi() {
         navigationItem.title = ""
-        navigationItem.largeTitleDisplayMode = .never
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.tintColor = .label
     }
     
     override func configureLayout() {

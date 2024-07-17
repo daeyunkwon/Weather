@@ -54,10 +54,6 @@ final class CitySearchViewController: BaseViewController {
     
     override func setupNavi() {
         navigationItem.title = "City"
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.largeTitleDisplayMode = .always
-        navigationController?.navigationBar.tintColor = .label
-        
         let right = UIBarButtonItem(image: Constant.SymbolImage.ellipsisCircle, style: .plain, target: self, action: #selector(rightBarButtonTapped))
         navigationItem.rightBarButtonItem = right
     }
