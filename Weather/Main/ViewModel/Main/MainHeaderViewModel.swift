@@ -9,13 +9,19 @@ import Foundation
 
 final class MainHeaderViewModel {
     
+    //MARK: - Inputs
+    
     var inputData = Observable<WeatherCurrent?>(nil)
+    
+    //MARK: - Outputs
     
     private(set) var outputData = Observable<WeatherCurrent?>(nil)
     private(set) var outputCityName = Observable<String?>(nil)
     private(set) var outputTemp = Observable<String>("")
     private(set) var outputDescription = Observable<String>("")
     private(set) var outputSubTemp = Observable<String>("")
+    
+    //MARK: - Init
     
     init() {
         transform()
@@ -34,6 +40,8 @@ final class MainHeaderViewModel {
             self.outputSubTemp.value = "최고: \(tempMax)  |  최저: \(tempMin)"
         }
     }
+    
+    //MARK: - Functions
     
     private func convertTempString(temp: Double, decimalCount: Int) -> String {
         let value = temp - 273.15

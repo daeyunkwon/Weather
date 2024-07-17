@@ -12,6 +12,7 @@ import SnapKit
 final class MainCollectionTableViewCell: BaseTableViewCell {
     
     //MARK: - Properties
+    
     private var isFirstSetting = true
     
     let viewModel = MainCollectionTableViewCellViewModel()
