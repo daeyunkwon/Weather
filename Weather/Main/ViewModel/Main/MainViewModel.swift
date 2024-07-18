@@ -14,19 +14,28 @@ final class MainViewModel {
     var inputFetchData = Observable<Void?>(nil)
     
     var inputListButtonTapped = Observable<Void?>(nil)
+    
     var inputMapButtonTapped = Observable<Void?>(nil)
     
     var inputFetchDataWithSelectedCity = Observable<City?>(nil)
     
     var inputFetchDataWithCoordinate = Observable<[Double]>([])
     
+    var inputIsAnimationEnabled = Observable<Void?>(nil)
+    
     //MARK: - Ouputs
     
     private(set) var outputWeatherCurrentData: WeatherCurrent?
+    
     private(set) var outputWeatherForecastData: WeatherForecastResult?
+    
     private(set) var outputFetchDataCompletion = Observable<Bool>(false)
+    
     private(set) var outputPushCitySearchVC = Observable<Void?>(nil)
+    
     private(set) var outputPresentMapVC = Observable<Void?>(nil)
+    
+    private(set) var outputIsAnimationEnabled: Bool = false
     
     //MARK: - Init
     
@@ -37,6 +46,7 @@ final class MainViewModel {
     private func transform() {
         inputFetchData.bind { [weak self] _ in
             self?.fetchData(lat: 37.583328, lon: 127.0) //Seoul
+            
         }
         
         inputListButtonTapped.bind { [weak self] _ in
@@ -56,6 +66,10 @@ final class MainViewModel {
             if values.count == 2 {
                 self?.fetchData(lat: values[0], lon: values[1])
             }
+        }
+        
+        inputIsAnimationEnabled.bind { [weak self] _ in
+            self?.outputIsAnimationEnabled = true
         }
     }
     

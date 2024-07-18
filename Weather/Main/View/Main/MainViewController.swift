@@ -16,8 +16,6 @@ final class MainViewController: BaseViewController {
     
     let viewModel = MainViewModel()
     
-    private var isAnimationEnabled = false
-    
     //MARK: - UI Components
     
     private let indicatorAnimationView: LottieAnimationView = {
@@ -110,7 +108,8 @@ final class MainViewController: BaseViewController {
             
             self.indicatorAnimationView.isHidden = true
             self.indicatorAnimationView.stop()
-            self.isAnimationEnabled = true
+            
+            self.viewModel.inputIsAnimationEnabled.value = () //애니메이션 활성화
         }
         
         viewModel.outputPushCitySearchVC.bind { [weak self] _ in
@@ -290,7 +289,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         
         if let header = view as? MainHeaderCell {
-            if self.isAnimationEnabled {
+            if self.viewModel.outputIsAnimationEnabled {
                 header.executeAnimation()
             }
         }
