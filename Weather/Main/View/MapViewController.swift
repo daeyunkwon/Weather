@@ -93,6 +93,9 @@ final class MapViewController: BaseViewController {
         let annotation = MKPointAnnotation()
         annotation.title = title
         annotation.coordinate = center
+    
+        let currentAnnotations = mapView.annotations
+        mapView.removeAnnotations(currentAnnotations.filter { $0.title == "" })
         
         self.mapView.addAnnotation(annotation)
     }
