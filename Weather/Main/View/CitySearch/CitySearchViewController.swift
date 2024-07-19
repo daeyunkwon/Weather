@@ -97,7 +97,7 @@ final class CitySearchViewController: BaseViewController {
 
 extension CitySearchViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 65
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
