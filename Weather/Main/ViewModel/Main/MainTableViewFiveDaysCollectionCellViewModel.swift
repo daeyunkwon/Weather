@@ -11,7 +11,7 @@ final class MainTableViewFiveDaysCollectionCellViewModel {
     
     //MARK: - Inputs
     
-    var inputData = Observable<WeatherForecast?>(nil)
+    var inputData = Observable<[WeatherForecast]?>(nil)
     
     //MARK: - Ouputs
     
@@ -31,12 +31,17 @@ final class MainTableViewFiveDaysCollectionCellViewModel {
             guard let self else { return }
             guard let list = list else { return }
             
-            self.getDayOfTheWeekFromDate(date: list.date ?? Date())
+            //온도 낮은 순으로 정렬
+            let filteredList = list.sorted(by: {
+                $0.main.temp < $1.main.temp
+            })
             
-            self.outputIconURL.value = APIURL.iconURL(icon: list.weather.first?.icon ?? "")
+            self.getDayOfTheWeekFromDate(date: list.first?.date ?? Date())
             
-            self.outputMinTemperature.value = "최저 \(Int(list.main.tempMin - 273.15))°"
-            self.outputMaxTemperature.value = "최고 \(Int(list.main.tempMax - 273.15))°"
+            self.outputIconURL.value = APIURL.iconURL(icon: list.first?.weather.first?.icon ?? "")
+            
+            self.outputMinTemperature.value = "최저 \(Int((filteredList.first?.main.temp ?? 0) - 273.15))°"
+            self.outputMaxTemperature.value = "최고 \(Int((filteredList.last?.main.temp ?? 0) - 273.15))°"
         }
     }
     

@@ -19,7 +19,7 @@ final class MainCollectionTableViewCellViewModel {
     private(set) var outputWeatherCurrentData = Observable<WeatherCurrent?>(nil)
     
     private(set) var outputThreeHoursForecastDataList = Observable<[WeatherForecast]>([])
-    private(set) var outputFiveDaysForecastDataList = Observable<[WeatherForecast]>([])
+    private(set) var outputFiveDaysForecastDataList = Observable<[[WeatherForecast]]>([])
     
     //MARK: - Init
     
@@ -39,8 +39,13 @@ final class MainCollectionTableViewCellViewModel {
     }
     
     //MARK: - Functions
-
+    
     private func classifyDataList(dataList: [WeatherForecast]) {
+        classifyForThreeHours(dataList)
+        classifyForFiveDays(dataList)
+    }
+    
+    private func classifyForThreeHours(_ dataList: [WeatherForecast]) {
         outputThreeHoursForecastDataList.value = dataList.filter {
             guard let date = $0.date else { return false }
             
@@ -57,66 +62,39 @@ final class MainCollectionTableViewCellViewModel {
                 return false
             }
         }
+    }
+    
+    private func classifyForFiveDays(_ dataList: [WeatherForecast]) {
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(identifier: "UTC") ?? TimeZone.current
         
-        
-        var isFindFirst = false
-        var isFindSecond = false
-        var isFindThird = false
-        var isFindFourth = false
-        var isFindFifth = false
-        
-        outputFiveDaysForecastDataList.value = dataList.filter {
-            guard let date = $0.date else { return false }
-            var calendar = Calendar.current
-            calendar.timeZone = TimeZone(identifier: "UTC") ?? TimeZone.current
+        var temp: [WeatherForecast] = []
+        var index = 0
+        for data in dataList {
+            let current = calendar.component(.day, from: data.date ?? Date())
             
-            let current = calendar.component(.day, from: date)
+            var today = calendar.date(byAdding: .day, value: index, to: Date()) //index 0: 오늘, 1: 1일뒤, 2: 2일뒤, 3: 3일뒤, 4: 4일뒤
+            var compare = calendar.component(.day, from: today ?? Date())
             
-            if !isFindFirst {
-                let today = calendar.date(byAdding: .day, value: 0, to: Date())
-                let compare = calendar.component(.day, from: today ?? Date())
-                if current == compare {
-                    isFindFirst = true
-                    return true
+            if current == compare { //같은 날짜인 경우
+                temp.append(data)
+                if data.dateText == dataList.last?.dateText {
+                    outputFiveDaysForecastDataList.value.append(temp)
+                    break
                 }
+                continue
+            } else { //같은 날짜가 아닌 경우
+                outputFiveDaysForecastDataList.value.append(temp)
+                temp = []
+                index += 1
             }
             
-            if !isFindSecond {
-                let nextDay = calendar.date(byAdding: .day, value: 1, to: Date())
-                let compare = calendar.component(.day, from: nextDay ?? Date())
-                if current == compare {
-                    isFindSecond = true
-                    return true
-                }
-            }
+            today = calendar.date(byAdding: .day, value: index, to: Date())
+            compare = calendar.component(.day, from: today ?? Date())
             
-            if !isFindThird {
-                let nextDay = calendar.date(byAdding: .day, value: 2, to: Date())
-                let compare = calendar.component(.day, from: nextDay ?? Date())
-                if current == compare {
-                    isFindThird = true
-                    return true
-                }
+            if current == compare {
+                temp.append(data)
             }
-            
-            if !isFindFourth {
-                let nextDay = calendar.date(byAdding: .day, value: 3, to: Date())
-                let compare = calendar.component(.day, from: nextDay ?? Date())
-                if current == compare {
-                    isFindFourth = true
-                    return true
-                }
-            }
-            
-            if !isFindFifth {
-                let nextDay = calendar.date(byAdding: .day, value: 4, to: Date())
-                let compare = calendar.component(.day, from: nextDay ?? Date())
-                if current == compare {
-                    isFindFifth = true
-                    return true
-                }
-            }
-            return false
         }
     }
     
